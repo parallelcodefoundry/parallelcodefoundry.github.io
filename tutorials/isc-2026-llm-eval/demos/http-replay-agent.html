@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HTTP Replay Agent Demo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17212b;
+        --muted: #5d6b78;
+        --line: #dbe3ea;
+        --paper: #f7f9fb;
+        --panel: #ffffff;
+        --blue: #245da8;
+        --blue-dark: #173f73;
+        --teal: #0f766e;
+        --soft: #eef4f9;
+        --code: #102030;
+        --code-bg: #edf2f7;
+        --warn: #8a5a00;
+        --warn-bg: #fff4d8;
+        --good: #0f766e;
+        --good-bg: #e7f5f3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: var(--blue);
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.18em;
+      }
+
+      .topbar {
+        background: rgba(247, 249, 251, 0.94);
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .topbar-inner {
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 0.8rem 1.25rem;
+      }
+
+      .brand {
+        color: var(--ink);
+        font-size: 0.94rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .page {
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 2.4rem 1.25rem 3.2rem;
+      }
+
+      .intro {
+        margin-bottom: 1.4rem;
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 0.82rem;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        margin: 0 0 0.75rem;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 3.6rem);
+        letter-spacing: 0;
+        line-height: 1.02;
+        margin-bottom: 0.9rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+      }
+
+      h3 {
+        font-size: 1rem;
+        line-height: 1.25;
+        margin-bottom: 0.45rem;
+      }
+
+      .lead {
+        color: #334353;
+        font-size: 1.05rem;
+        max-width: 74ch;
+      }
+
+      .layout {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: minmax(280px, 0.72fr) minmax(320px, 1fr);
+      }
+
+      .stack {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        min-width: 0;
+        padding: 1rem;
+      }
+
+      .note {
+        border-radius: 8px;
+        font-size: 0.94rem;
+        margin: 0;
+        padding: 0.85rem;
+      }
+
+      .note.good {
+        background: var(--good-bg);
+        border: 1px solid #c9e9e4;
+        color: #0c5f58;
+      }
+
+      .note.warn {
+        background: var(--warn-bg);
+        border: 1px solid #f2dfaa;
+        color: var(--warn);
+      }
+
+      .step-list {
+        counter-reset: steps;
+        display: grid;
+        gap: 0.85rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      .step {
+        border-top: 1px solid var(--line);
+        counter-increment: steps;
+        list-style: none;
+        padding-top: 0.85rem;
+      }
+
+      .step:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .step h3::before {
+        align-items: center;
+        background: var(--soft);
+        border: 1px solid #dce7f0;
+        border-radius: 999px;
+        color: var(--blue-dark);
+        content: counter(steps);
+        display: inline-flex;
+        font-size: 0.8rem;
+        font-weight: 850;
+        height: 1.7rem;
+        justify-content: center;
+        margin-right: 0.45rem;
+        width: 1.7rem;
+      }
+
+      .step h3 {
+        align-items: center;
+        display: flex;
+      }
+
+      code {
+        background: var(--code-bg);
+        border-radius: 4px;
+        color: var(--code);
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", monospace;
+        font-size: 0.92em;
+        padding: 0.08rem 0.22rem;
+      }
+
+      pre {
+        background: #101923;
+        border-radius: 8px;
+        color: #eaf2fb;
+        margin: 0.65rem 0 0;
+        overflow-x: auto;
+        padding: 0.85rem;
+      }
+
+      pre code {
+        background: transparent;
+        color: inherit;
+        display: block;
+        font-size: 0.88rem;
+        line-height: 1.45;
+        padding: 0;
+        white-space: pre;
+      }
+
+      .checklist {
+        display: grid;
+        gap: 0.72rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      .checklist li {
+        background: var(--soft);
+        border: 1px solid #dce7f0;
+        border-radius: 8px;
+        list-style: none;
+        padding: 0.78rem;
+      }
+
+      .checklist strong {
+        display: block;
+        margin-bottom: 0.18rem;
+      }
+
+      .file-list {
+        display: grid;
+        gap: 0.45rem;
+        margin: 0.75rem 0 0;
+        padding: 0;
+      }
+
+      .file-list li {
+        list-style: none;
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 860px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .topbar-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .page {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="../index.html">LLM Evaluation for HPC Research</a>
+        <a href="../index.html#demos">Back to demos</a>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="intro" aria-labelledby="title">
+        <p class="eyebrow">Demo 6</p>
+        <h1 id="title">Replaying Logged Generations</h1>
+        <p class="lead">
+          This demo runs a tiny agent through an OpenAI-compatible API, records
+          the HTTP response, and then replays the same response later. The point
+          is to separate the workflow you are evaluating from the model call you
+          happened to receive during one run.
+        </p>
+      </section>
+
+      <section class="layout" aria-label="HTTP replay demo instructions">
+        <div class="stack">
+          <div class="panel">
+            <h2>Agent</h2>
+            <p>
+              The agent checks a short task description for reproducibility
+              details, asks a model to write a brief trace note, and saves the
+              run so it can be inspected later.
+            </p>
+            <ul class="file-list">
+              <li><code>.agent_traces/last_run.json</code></li>
+              <li><code>.openai_http_cache/*.json</code></li>
+            </ul>
+            <p class="small">
+              The local model runs behind a llama.cpp OpenAI-compatible server,
+              so the same recorder works for local and hosted model calls.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h2>What To Check</h2>
+            <p>
+              Check that the model output is the same when you run with
+              <code>--replay</code>. Then open the trace and cache files to see
+              what was saved.
+            </p>
+            <p class="small">
+              The cache should include the request and response, but not
+              <code>Authorization</code> or <code>api-key</code> headers.
+            </p>
+          </div>
+
+          <p class="note warn">
+            The small local model is only there to make the demo practical on a
+            laptop. Agent outputs will look more realistic with commercial
+            models.
+          </p>
+        </div>
+
+        <div class="stack">
+          <div class="panel">
+            <h2>Run It Locally</h2>
+            <ol class="step-list">
+              <li class="step">
+                <h3>Install the requirements</h3>
+                <p>Run this from the repository root.</p>
+                <pre><code>python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r demos/http_replay_agent/requirements.txt</code></pre>
+                <p class="small">
+                  On Windows PowerShell, activate with
+                  <code>.venv\Scripts\Activate.ps1</code>.
+                </p>
+              </li>
+              <li class="step">
+                <h3>Start the local model server</h3>
+                <p>
+                  Leave this terminal running. The first run downloads the
+                  default GGUF model and starts the server on port
+                  <code>8008</code>.
+                </p>
+                <pre><code>python demos/http_replay_agent/start_local_server.py</code></pre>
+              </li>
+              <li class="step">
+                <h3>Run the agent</h3>
+                <p>Use a second terminal with the same virtual environment.</p>
+                <pre><code>python demos/http_replay_agent/agent.py</code></pre>
+              </li>
+              <li class="step">
+                <h3>Replay the same call</h3>
+                <p>
+                  This should reuse the cached HTTP response for the matching
+                  request.
+                </p>
+                <pre><code>python demos/http_replay_agent/agent.py --replay</code></pre>
+              </li>
+            </ol>
+          </div>
+
+          <div class="panel">
+            <h2>Common Checks</h2>
+            <p class="note good">
+              If the server is running correctly, the agent should print a
+              tool result, a raw model note, the trace path, and the cache
+              directory.
+            </p>
+            <pre><code>python demos/http_replay_agent/agent.py \
+  --local-base-url http://127.0.0.1:8010/v1</code></pre>
+            <p class="small">
+              Use the alternate base URL only if you started the server on a
+              different port, such as <code>--port 8010</code>.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h2>Hosted OpenAI Variant</h2>
+            <p>
+              The hosted path uses the same agent and recorder, but sends the
+              request to the OpenAI API.
+            </p>
+            <pre><code>export OPENAI_API_KEY=...
+python demos/http_replay_agent/agent.py --backend openai
+python demos/http_replay_agent/agent.py --backend openai --replay</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
