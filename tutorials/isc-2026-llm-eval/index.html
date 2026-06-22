@@ -311,13 +311,6 @@
         margin-top: 1rem;
       }
 
-      .pending {
-        color: var(--muted);
-        font-size: 0.9rem;
-        font-weight: 800;
-        margin-top: 1rem;
-      }
-
       .materials {
         align-items: stretch;
         display: grid;
@@ -530,8 +523,8 @@
           <div class="section-heading">
             <h2 id="demos-title">Hands-On Demos</h2>
             <p>
-              Each demo is meant to isolate one evaluation idea from the slides.
-              Live links will be added as the demos are built.
+              Each demo isolates one evaluation idea from the slides and keeps
+              the moving parts small enough to inspect during the tutorial.
             </p>
           </div>
 
@@ -558,36 +551,6 @@
 
             <article class="demo-card">
               <span class="number">3</span>
-              <h3>Benchmark Leakage</h3>
-              <p>
-                Compare clean and contaminated evaluation examples to show how
-                leakage can inflate apparent model ability.
-              </p>
-              <span class="pending">Coming soon</span>
-            </article>
-
-            <article class="demo-card">
-              <span class="number">4</span>
-              <h3>Judge Reliability</h3>
-              <p>
-                Test how LLM judges and human judges can drift, disagree, or
-                reward style instead of correctness.
-              </p>
-              <span class="pending">Coming soon</span>
-            </article>
-
-            <article class="demo-card">
-              <span class="number">5</span>
-              <h3>Cost and Runtime Reporting</h3>
-              <p>
-                Compare candidate systems using accuracy, runtime, token counts,
-                API cost, and GPU time together.
-              </p>
-              <span class="pending">Coming soon</span>
-            </article>
-
-            <article class="demo-card">
-              <span class="number">6</span>
               <h3>Replaying Logged Generations</h3>
               <p>
                 Run a tiny local agent, inspect its trace, and optionally replay
