@@ -1,11 +1,610 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=site/index.html">
-    <title>Redirecting...</title>
-</head>
-<body>
-    <p>Redirecting to <a href="site/index.html">site/index.html</a>...</p>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rigorous Evaluation of LLM Components in HPC Research</title>
+    <meta
+      name="description"
+      content="Tutorial materials for Rigorous Evaluation of LLM Components in HPC Research at ISC 2026."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17212b;
+        --muted: #5d6b78;
+        --line: #dbe3ea;
+        --paper: #f7f9fb;
+        --panel: #ffffff;
+        --blue: #245da8;
+        --blue-dark: #173f73;
+        --teal: #0f766e;
+        --accent-soft: #eef4f9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: var(--blue);
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.18em;
+      }
+
+      a:hover {
+        color: var(--blue-dark);
+      }
+
+      .site-shell {
+        min-height: 100vh;
+      }
+
+      .topbar {
+        border-bottom: 1px solid var(--line);
+        background: rgba(247, 249, 251, 0.92);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .topbar-inner {
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 0.8rem 1.25rem;
+      }
+
+      .brand {
+        color: var(--ink);
+        font-size: 0.94rem;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-decoration: none;
+      }
+
+      .nav {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 1rem;
+        justify-content: flex-end;
+      }
+
+      .nav a {
+        color: var(--muted);
+        font-size: 0.92rem;
+        font-weight: 650;
+        text-decoration: none;
+      }
+
+      .nav a:hover {
+        color: var(--ink);
+      }
+
+      main {
+        overflow: hidden;
+      }
+
+      .hero {
+        background: linear-gradient(135deg, #ffffff 0%, #eef4f9 100%);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-inner {
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 4.5rem 1.25rem 4rem;
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        margin: 0 0 1rem;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        font-size: clamp(2.45rem, 6vw, 4.95rem);
+        letter-spacing: 0;
+        line-height: 0.98;
+        margin-bottom: 1.2rem;
+        max-width: 13ch;
+      }
+
+      .hero-copy {
+        color: #334353;
+        font-size: 1.14rem;
+        max-width: 62ch;
+      }
+
+      .event-summary {
+        background: #d7e3ec;
+        border: 1px solid #d7e3ec;
+        border-radius: 8px;
+        display: grid;
+        gap: 1px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 1.7rem;
+        max-width: 900px;
+        overflow: hidden;
+      }
+
+      .event-detail {
+        background: rgba(255, 255, 255, 0.78);
+        padding: 0.95rem 1rem;
+      }
+
+      .event-label {
+        color: var(--muted);
+        display: block;
+        font-size: 0.74rem;
+        font-weight: 850;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .event-detail strong {
+        display: block;
+        line-height: 1.25;
+        margin-top: 0.25rem;
+      }
+
+      .event-detail p {
+        color: #405163;
+        font-size: 0.94rem;
+        margin: 0.2rem 0 0;
+      }
+
+      .actions {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 1.9rem;
+      }
+
+      .button {
+        align-items: center;
+        border: 1px solid var(--blue);
+        border-radius: 6px;
+        display: inline-flex;
+        font-weight: 800;
+        gap: 0.5rem;
+        min-height: 44px;
+        padding: 0.72rem 0.95rem;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        background: var(--blue);
+        color: #ffffff;
+      }
+
+      .button.secondary {
+        background: #ffffff;
+        color: var(--blue);
+      }
+
+      .button:hover {
+        border-color: var(--blue-dark);
+      }
+
+      .button.primary:hover {
+        background: var(--blue-dark);
+        color: #ffffff;
+      }
+
+      .section {
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 4rem 1.25rem;
+      }
+
+      .section + .section {
+        border-top: 1px solid var(--line);
+      }
+
+      .section-heading {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: minmax(0, 0.82fr) minmax(260px, 1fr);
+        margin-bottom: 1.8rem;
+      }
+
+      h2 {
+        font-size: clamp(1.75rem, 3vw, 2.55rem);
+        letter-spacing: 0;
+        line-height: 1.08;
+        margin-bottom: 0;
+      }
+
+      .section-heading p,
+      .lead {
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      .info-grid,
+      .demo-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .info-item,
+      .demo-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 1.1rem;
+      }
+
+      .number {
+        align-items: center;
+        background: var(--accent-soft);
+        border: 1px solid #dce7f0;
+        border-radius: 999px;
+        color: var(--blue-dark);
+        display: inline-flex;
+        font-size: 0.8rem;
+        font-weight: 850;
+        height: 1.9rem;
+        justify-content: center;
+        margin-bottom: 0.85rem;
+        width: 1.9rem;
+      }
+
+      .info-item h3,
+      .demo-card h3 {
+        font-size: 1rem;
+        line-height: 1.25;
+        margin-bottom: 0.45rem;
+      }
+
+      .info-item p,
+      .demo-card p {
+        color: var(--muted);
+        font-size: 0.94rem;
+        margin-bottom: 0;
+      }
+
+      .demo-card {
+        display: flex;
+        flex-direction: column;
+        min-height: 190px;
+      }
+
+      .demo-card p {
+        flex: 1;
+      }
+
+      .card-link {
+        font-weight: 800;
+        margin-top: 1rem;
+      }
+
+      .pending {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 800;
+        margin-top: 1rem;
+      }
+
+      .materials {
+        align-items: stretch;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .material-primary {
+        background: var(--blue-dark);
+        border-radius: 8px;
+        color: #ffffff;
+        padding: 1.4rem;
+      }
+
+      .material-primary p {
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .material-primary a {
+        color: #ffffff;
+        font-weight: 850;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        margin: 0 auto;
+        max-width: 1120px;
+        padding: 1.5rem 1.25rem 2.2rem;
+      }
+
+      @media (max-width: 860px) {
+        .section-heading,
+        .materials {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-inner {
+          padding-top: 3rem;
+        }
+
+        .info-grid,
+        .demo-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .event-summary {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .topbar-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav {
+          justify-content: flex-start;
+        }
+
+        .hero-inner,
+        .section {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <a class="brand" href="#">LLM Evaluation for HPC Research</a>
+          <nav class="nav" aria-label="Main navigation">
+            <a href="#about">About</a>
+            <a href="#materials">Materials</a>
+            <a href="#demos">Demos</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div class="hero-inner">
+            <p class="eyebrow">ISC 2026 Tutorial</p>
+            <h1 id="page-title">Rigorous Evaluation of LLM Components in HPC Research</h1>
+            <p class="hero-copy">
+              A hands-on tutorial on evaluating LLMs and LLM-based research
+              components with the same care used for other scientific and HPC
+              experiments.
+            </p>
+            <div class="event-summary" aria-label="Event details">
+              <div class="event-detail">
+                <span class="event-label">Date and Time</span>
+                <strong>Monday, June 22, 2026</strong>
+                <p>2:00 PM to 6:00 PM (Europe/Berlin)</p>
+              </div>
+              <div class="event-detail">
+                <span class="event-label">Location</span>
+                <strong>Hall X12</strong>
+                <p>1st Floor</p>
+              </div>
+              <div class="event-detail">
+                <span class="event-label">Session</span>
+                <strong>Tutorial</strong>
+                <p>4 hours</p>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="button primary" href="../slides/slides.pdf">Open slides</a>
+              <a class="button secondary" href="#demos">View demos</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="about" aria-labelledby="about-title">
+          <div class="section-heading">
+            <h2 id="about-title">What This Covers</h2>
+            <p>
+              The tutorial follows the slide deck section by section: first
+              building shared vocabulary, then covering common failure modes and
+              the practices needed for reproducible evaluation.
+            </p>
+          </div>
+
+          <div class="info-grid">
+            <article class="info-item">
+              <span class="number">1</span>
+              <h3>Introduction</h3>
+              <p>
+                Tutorial goals: how to evaluate LLMs in HPC and scientific
+                research, and what can go wrong when they are used as research
+                components.
+              </p>
+            </article>
+            <article class="info-item">
+              <span class="number">2</span>
+              <h3>Introduction to LLMs</h3>
+              <p>
+                Shared vocabulary for tokens, text generation, models, and the
+                sources of randomness in LLM outputs.
+              </p>
+            </article>
+            <article class="info-item">
+              <span class="number">3</span>
+              <h3>How to Lie with LLM Results</h3>
+              <p>
+                Pitfalls such as ignoring randomness, cherry picking, benchmark
+                leakage, rubric drift, hidden human intervention, and unreported
+                cost.
+              </p>
+            </article>
+            <article class="info-item">
+              <span class="number">4</span>
+              <h3>Experimental Design for Stochastic Components</h3>
+              <p>
+                How to design experiments when LLM calls, agents, or other
+                parts of the workflow can vary from run to run.
+              </p>
+            </article>
+            <article class="info-item">
+              <span class="number">5</span>
+              <h3>Transparency and Reproducibility</h3>
+              <p>
+                Logging generations, saving agent traces, and making enough raw
+                output available for review and replay.
+              </p>
+            </article>
+            <article class="info-item">
+              <span class="number">6</span>
+              <h3>Human Validation: When and How</h3>
+              <p>
+                Where human scoring helps, why it is hard to reproduce, and how
+                to pair it with less subjective metrics.
+              </p>
+            </article>
+            <article class="info-item">
+              <span class="number">7</span>
+              <h3>Baselines, Metrics, and Ablations</h3>
+              <p>
+                Representative baselines, probabilistic metrics, ablations, and
+                performance measurement for LLM-generated code.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="materials" aria-labelledby="materials-title">
+          <div class="section-heading">
+            <h2 id="materials-title">Materials</h2>
+            <p>
+              Slides and hands-on demos for the tutorial are collected here.
+            </p>
+          </div>
+
+          <div class="materials">
+            <div class="material-primary">
+              <h3>Slides</h3>
+              <p>
+                Tutorial outline, lecture content, and hands-on evaluation
+                examples.
+              </p>
+              <a href="../slides/slides.pdf">Open slides</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="demos" aria-labelledby="demos-title">
+          <div class="section-heading">
+            <h2 id="demos-title">Hands-On Demos</h2>
+            <p>
+              Each demo is meant to isolate one evaluation idea from the slides.
+              Live links will be added as the demos are built.
+            </p>
+          </div>
+
+          <div class="demo-grid">
+            <article class="demo-card">
+              <span class="number">1</span>
+              <h3>Where Randomness Enters Generation</h3>
+              <p>
+                Inspect preset next-token logits and compare temperature,
+                random sampling, top-k, top-p, and greedy decoding.
+              </p>
+              <a class="card-link" href="demos/sampling.html">Open demo</a>
+            </article>
+
+            <article class="demo-card">
+              <span class="number">2</span>
+              <h3>Probabilistic Metrics</h3>
+              <p>
+                Estimate the probability that a model produces a correct output
+                instead of reporting a single sampled answer.
+              </p>
+              <a class="card-link" href="demos/probabilistic-metrics.html">Open demo</a>
+            </article>
+
+            <article class="demo-card">
+              <span class="number">3</span>
+              <h3>Benchmark Leakage</h3>
+              <p>
+                Compare clean and contaminated evaluation examples to show how
+                leakage can inflate apparent model ability.
+              </p>
+              <span class="pending">Coming soon</span>
+            </article>
+
+            <article class="demo-card">
+              <span class="number">4</span>
+              <h3>Judge Reliability</h3>
+              <p>
+                Test how LLM judges and human judges can drift, disagree, or
+                reward style instead of correctness.
+              </p>
+              <span class="pending">Coming soon</span>
+            </article>
+
+            <article class="demo-card">
+              <span class="number">5</span>
+              <h3>Cost and Runtime Reporting</h3>
+              <p>
+                Compare candidate systems using accuracy, runtime, token counts,
+                API cost, and GPU time together.
+              </p>
+              <span class="pending">Coming soon</span>
+            </article>
+
+            <article class="demo-card">
+              <span class="number">6</span>
+              <h3>Replaying Logged Generations</h3>
+              <p>
+                Run a tiny local agent, inspect its trace, and optionally replay
+                a recorded OpenAI HTTP response.
+              </p>
+              <a class="card-link" href="demos/http-replay-agent.html">Open demo</a>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>
+          Rigorous Evaluation of LLM Components in HPC Research. Tutorial
+          materials for ISC 2026.
+        </p>
+      </footer>
+    </div>
+  </body>
 </html>
