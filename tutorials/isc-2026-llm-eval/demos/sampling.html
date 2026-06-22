@@ -471,8 +471,8 @@
           <h1 id="title">Where Randomness Enters Generation</h1>
           <p class="lead">
             This demo starts with one preset context and a fixed set of
-            next-token logits. You can also load SmolLM2 360M in the browser to
-            sample one token at a time from editable text.
+            next-token logits. You can also load a 4-bit TinyLlama 1.1B model
+            in the browser to sample one token at a time from editable text.
           </p>
         </div>
       </section>
@@ -523,8 +523,12 @@
 
             <div class="button-row">
               <button id="loadModelButton" class="button secondary" type="button" hidden>
-                Load SmolLM2
+                Download TinyLlama
               </button>
+              <button id="loadLocalFileButton" class="button secondary" type="button" hidden>
+                Load GGUF file
+              </button>
+              <input id="localModelFile" type="file" accept=".gguf" hidden />
               <button id="sampleButton" class="button primary" type="button">Sample token</button>
               <button id="appendButton" class="button secondary" type="button" disabled>
                 Append sampled token
@@ -570,9 +574,9 @@
         default: `${WLLAMA_BASE_URL}/esm/wasm/wllama.wasm`,
       };
       const LOCAL_MODEL = {
-        name: "SmolLM2 360M",
-        repo: "HuggingFaceTB/SmolLM2-360M-Instruct-GGUF",
-        file: "smollm2-360m-instruct-q8_0.gguf",
+        name: "TinyLlama 1.1B",
+        repo: "TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF",
+        file: "tinyllama-1.1b-chat-v1.0.Q4_0.gguf",
       };
       const LOCAL_MODEL_URL = `https://huggingface.co/${LOCAL_MODEL.repo}/resolve/main/${LOCAL_MODEL.file}`;
 
@@ -595,6 +599,7 @@
         wllama: null,
         localRows: [],
         localStatus: "idle",
+        localModelName: LOCAL_MODEL.name,
         isSampling: false,
       };
 
@@ -608,6 +613,8 @@
         topK: document.querySelector("#topK"),
         topP: document.querySelector("#topP"),
         loadModelButton: document.querySelector("#loadModelButton"),
+        loadLocalFileButton: document.querySelector("#loadLocalFileButton"),
+        localModelFile: document.querySelector("#localModelFile"),
         sampleButton: document.querySelector("#sampleButton"),
         appendButton: document.querySelector("#appendButton"),
         resetButton: document.querySelector("#resetButton"),
@@ -651,6 +658,10 @@
       function setStatus(message, status = state.localStatus) {
         state.localStatus = status;
         els.modeStatus.textContent = message;
+      }
+
+      function localLoadPrompt() {
+        return `Download ${LOCAL_MODEL.name} or load a GGUF file, then sample one token from the editable text.`;
       }
 
       function createDisabledCacheManager() {
@@ -833,7 +844,7 @@
         if (state.localRows.length === 0) {
           const message = isLocalReady()
             ? "Sample a token to show the top log probabilities reported by wllama."
-            : `Load ${LOCAL_MODEL.name} before sampling from browser-generated probabilities.`;
+            : `Download ${LOCAL_MODEL.name} or load a GGUF file before sampling from browser-generated probabilities.`;
           els.logitRows.innerHTML = `<tr><td class="empty-row" colspan="4">${escapeHtml(message)}</td></tr>`;
           els.distributionSummary.textContent =
             "Local mode uses top log probabilities from the completion API rather than raw full-vocabulary logits.";
@@ -1095,8 +1106,8 @@
         state.sampled = null;
         state.localRows = [];
         els.sampledToken.textContent = "Sampling...";
-        els.sampleExplanation.textContent = `Requesting one token from ${LOCAL_MODEL.name}.`;
-        setStatus(`Sampling one token with ${LOCAL_MODEL.name}.`, "sampling");
+        els.sampleExplanation.textContent = `Requesting one token from ${state.localModelName}.`;
+        setStatus(`Sampling one token with ${state.localModelName}.`, "sampling");
         updateControls();
         renderLocalDistribution();
 
@@ -1114,11 +1125,11 @@
           };
           els.sampledToken.textContent = displayToken(result.rawToken);
           els.sampleExplanation.textContent = Number.isFinite(result.selectedLogprob)
-            ? `${displayToken(result.rawToken)} was sampled by ${LOCAL_MODEL.name}. Its reported probability is ${formatPercent(
+            ? `${displayToken(result.rawToken)} was sampled by ${state.localModelName}. Its reported probability is ${formatPercent(
                 Math.exp(result.selectedLogprob),
               )}.`
-            : `${displayToken(result.rawToken)} was sampled by ${LOCAL_MODEL.name}.`;
-          setStatus(`${LOCAL_MODEL.name} is ready.`, "ready");
+            : `${displayToken(result.rawToken)} was sampled by ${state.localModelName}.`;
+          setStatus(`${state.localModelName} is ready.`, "ready");
         } catch (error) {
           state.localRows = [];
           state.sampled = null;
@@ -1144,13 +1155,13 @@
         state.localRows = [];
         els.sampledToken.textContent = "None yet";
         els.sampleExplanation.textContent = localMode
-          ? `Load ${LOCAL_MODEL.name}, then sample one token from the editable text.`
+          ? localLoadPrompt()
           : "Press Sample token to draw once from the active distribution.";
         if (localMode) {
           setStatus(
             isLocalReady()
-              ? `${LOCAL_MODEL.name} is ready.`
-              : `Local mode is idle. Load ${LOCAL_MODEL.name} to enable sampling.`,
+              ? `${state.localModelName} is ready.`
+              : `Local mode is idle. Download ${LOCAL_MODEL.name} or load a GGUF file.`,
             isLocalReady() ? "ready" : "idle",
           );
         } else {
@@ -1168,6 +1179,9 @@
         els.contextText.disabled = !localMode || busy;
         els.loadModelButton.hidden = !localMode || localReady;
         els.loadModelButton.disabled = busy;
+        els.loadLocalFileButton.hidden = !localMode || localReady;
+        els.loadLocalFileButton.disabled = busy;
+        els.localModelFile.disabled = busy || localReady;
         els.sampleButton.disabled = localMode ? !localReady || busy : false;
         els.appendButton.disabled = !localMode || busy || !state.sampled;
         els.resetButton.disabled = busy;
@@ -1179,38 +1193,75 @@
         els.topP.disabled = busy || method !== "topp";
       }
 
-      async function loadLocalModel() {
+      async function ensureWllama() {
+        if (state.wllama) {
+          return;
+        }
+
+        setStatus("Loading wllama module.", "loading");
+        updateControls();
+        const { Wllama, LoggerWithoutDebug } = await import(WLLAMA_MODULE_URL);
+
+        state.wllama = new Wllama(WLLAMA_PATH_CONFIG, {
+          cacheManager: createDisabledCacheManager(),
+          logger: LoggerWithoutDebug,
+          modelManager: createDisabledModelManager(),
+          suppressNativeLog: true,
+        });
+      }
+
+      async function loadModelBlob(modelBlob, modelName) {
+        await ensureWllama();
+        state.localModelName = modelName;
+        setStatus(`Loading ${modelName} into wllama.`, "loading");
+        await state.wllama.loadModel([modelBlob], {
+          n_gpu_layers: 0,
+          n_threads: 1,
+        });
+        setStatus(`${modelName} is ready.`, "ready");
+      }
+
+      async function loadDownloadedModel() {
         if (isLocalReady() || state.localStatus === "loading") {
           return;
         }
 
         try {
-          setStatus("Loading wllama module.", "loading");
+          state.localModelName = LOCAL_MODEL.name;
+          setStatus(`Preparing to download ${LOCAL_MODEL.name}.`, "loading");
           updateControls();
-          const { Wllama, LoggerWithoutDebug } = await import(WLLAMA_MODULE_URL);
-
-          state.wllama = new Wllama(WLLAMA_PATH_CONFIG, {
-            cacheManager: createDisabledCacheManager(),
-            logger: LoggerWithoutDebug,
-            modelManager: createDisabledModelManager(),
-            suppressNativeLog: true,
-          });
-
+          await ensureWllama();
           setStatus(`Downloading ${LOCAL_MODEL.file}: 0%.`, "loading");
           const modelBlob = await fetchModelBlob();
-          setStatus(`Loading ${LOCAL_MODEL.name} into wllama.`, "loading");
-          await state.wllama.loadModel([modelBlob], {
-            n_gpu_layers: 0,
-            n_threads: 1,
-          });
-
-          setStatus(`${LOCAL_MODEL.name} is ready.`, "ready");
+          await loadModelBlob(modelBlob, LOCAL_MODEL.name);
         } catch (error) {
           state.wllama = null;
           setStatus(`Local model error: ${error.message || error}`, "error");
           els.sampleExplanation.textContent =
-            `${LOCAL_MODEL.name} could not be loaded. Switch off local mode to keep using preset logits.`;
+            `${state.localModelName} could not be loaded. Switch off local mode to keep using preset logits.`;
         } finally {
+          renderDistribution();
+        }
+      }
+
+      async function loadSelectedModelFile(file) {
+        if (!file || isLocalReady() || state.localStatus === "loading") {
+          return;
+        }
+
+        const modelName = file.name || "Selected GGUF model";
+        try {
+          state.localModelName = modelName;
+          setStatus(`Loading ${modelName}.`, "loading");
+          updateControls();
+          await loadModelBlob(file, modelName);
+        } catch (error) {
+          state.wllama = null;
+          setStatus(`Local model error: ${error.message || error}`, "error");
+          els.sampleExplanation.textContent =
+            `${modelName} could not be loaded. Switch off local mode to keep using preset logits.`;
+        } finally {
+          els.localModelFile.value = "";
           renderDistribution();
         }
       }
@@ -1236,13 +1287,13 @@
         els.sampledToken.textContent = "None yet";
         els.sampleExplanation.textContent =
           isLocalMode()
-            ? `Load ${LOCAL_MODEL.name}, then sample one token from the editable text.`
+            ? localLoadPrompt()
             : "Press Sample token to draw once from the active distribution.";
         if (isLocalMode()) {
           setStatus(
             isLocalReady()
-              ? `${LOCAL_MODEL.name} is ready.`
-              : `Local mode is idle. Load ${LOCAL_MODEL.name} to enable sampling.`,
+              ? `${state.localModelName} is ready.`
+              : `Local mode is idle. Download ${LOCAL_MODEL.name} or load a GGUF file.`,
             isLocalReady() ? "ready" : "idle",
           );
         } else {
@@ -1258,7 +1309,13 @@
       els.topK.addEventListener("input", renderDistribution);
       els.topP.addEventListener("input", renderDistribution);
       els.sampleButton.addEventListener("click", sampleToken);
-      els.loadModelButton.addEventListener("click", loadLocalModel);
+      els.loadModelButton.addEventListener("click", loadDownloadedModel);
+      els.loadLocalFileButton.addEventListener("click", () => {
+        els.localModelFile.click();
+      });
+      els.localModelFile.addEventListener("change", () => {
+        loadSelectedModelFile(els.localModelFile.files?.[0]);
+      });
       els.appendButton.addEventListener("click", appendSampledToken);
       els.resetButton.addEventListener("click", resetDemo);
 
