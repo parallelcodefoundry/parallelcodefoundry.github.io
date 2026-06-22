@@ -1,0 +1,1268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sampling Variation Demo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17212b;
+        --muted: #5d6b78;
+        --line: #dbe3ea;
+        --paper: #f7f9fb;
+        --panel: #ffffff;
+        --blue: #245da8;
+        --blue-dark: #173f73;
+        --teal: #0f766e;
+        --soft: #eef4f9;
+        --excluded: #eef1f4;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      a {
+        color: var(--blue);
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.18em;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+        max-width: 100%;
+      }
+
+      .topbar {
+        background: rgba(247, 249, 251, 0.94);
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .topbar-inner {
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 1160px;
+        padding: 0.8rem 1.25rem;
+      }
+
+      .brand {
+        color: var(--ink);
+        font-size: 0.94rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .page {
+        margin: 0 auto;
+        max-width: 1160px;
+        padding: 2.4rem 1.25rem 3rem;
+      }
+
+      .intro {
+        margin-bottom: 1.4rem;
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 0.82rem;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        margin: 0 0 0.75rem;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 3.6rem);
+        letter-spacing: 0;
+        line-height: 1.02;
+        margin-bottom: 0.9rem;
+      }
+
+      .lead {
+        color: #334353;
+        font-size: 1.05rem;
+        max-width: 70ch;
+      }
+
+      .demo {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: minmax(320px, 0.74fr) minmax(320px, 1fr);
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        min-width: 0;
+        padding: 1rem;
+      }
+
+      .panel h2 {
+        font-size: 1.05rem;
+        line-height: 1.2;
+        margin-bottom: 0.8rem;
+      }
+
+      .control-stack {
+        display: grid;
+        gap: 1rem;
+        min-width: 0;
+      }
+
+      label {
+        color: var(--ink);
+        display: block;
+        font-size: 0.88rem;
+        font-weight: 780;
+        margin-bottom: 0.38rem;
+      }
+
+      textarea {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: var(--ink);
+        display: block;
+        min-height: 150px;
+        min-width: 0;
+        padding: 0.8rem;
+        resize: vertical;
+        width: 100%;
+      }
+
+      textarea:disabled {
+        background: #f8fafc;
+        color: #334353;
+      }
+
+      .switch-row,
+      .range-row,
+      .select-row,
+      .button-row {
+        align-items: center;
+        display: flex;
+        gap: 0.75rem;
+        min-width: 0;
+      }
+
+      .switch-row {
+        justify-content: space-between;
+      }
+
+      .switch {
+        align-items: center;
+        cursor: pointer;
+        display: inline-flex;
+        gap: 0.55rem;
+        margin: 0;
+      }
+
+      .switch input {
+        appearance: none;
+        background: #cbd5df;
+        border-radius: 999px;
+        height: 1.35rem;
+        margin: 0;
+        position: relative;
+        width: 2.55rem;
+      }
+
+      .switch input::after {
+        background: #ffffff;
+        border-radius: 50%;
+        content: "";
+        height: 1rem;
+        left: 0.18rem;
+        position: absolute;
+        top: 0.17rem;
+        transition: transform 160ms ease;
+        width: 1rem;
+      }
+
+      .switch input:checked {
+        background: var(--blue);
+      }
+
+      .switch input:checked::after {
+        transform: translateX(1.18rem);
+      }
+
+      .status {
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin: 0;
+        min-width: 0;
+      }
+
+      select,
+      input[type="number"] {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        min-height: 40px;
+        padding: 0.45rem 0.55rem;
+      }
+
+      select {
+        flex: 1;
+        min-width: 0;
+        width: 100%;
+      }
+
+      input[type="range"] {
+        accent-color: var(--blue);
+        flex: 1;
+        min-width: 0;
+      }
+
+      input[type="number"] {
+        width: 5.8rem;
+      }
+
+      input:disabled,
+      select:disabled {
+        background: #eef1f4;
+        color: #7c8996;
+      }
+
+      .secondary-controls {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        min-width: 0;
+      }
+
+      .control-box {
+        background: #f8fafc;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        min-width: 0;
+        padding: 0.8rem;
+      }
+
+      .button-row {
+        flex-wrap: wrap;
+      }
+
+      .button {
+        align-items: center;
+        border: 1px solid var(--blue);
+        border-radius: 6px;
+        cursor: pointer;
+        display: inline-flex;
+        font-weight: 800;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0.64rem 0.85rem;
+      }
+
+      .button.primary {
+        background: var(--blue);
+        color: #ffffff;
+      }
+
+      .button.secondary {
+        background: #ffffff;
+        color: var(--blue);
+      }
+
+      .button:disabled {
+        border-color: #c8d3dd;
+        color: #7c8996;
+        cursor: not-allowed;
+      }
+
+      .button.primary:disabled {
+        background: #d8e0e8;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .sample-box {
+        background: var(--soft);
+        border: 1px solid #dce7f0;
+        border-radius: 8px;
+        margin-top: 1rem;
+        padding: 1rem;
+      }
+
+      .sample-label {
+        color: var(--muted);
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 850;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.35rem;
+        text-transform: uppercase;
+      }
+
+      .sample-token {
+        display: block;
+        font-size: 2rem;
+        font-weight: 850;
+        line-height: 1.05;
+        min-height: 2.2rem;
+      }
+
+      .explain {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0.75rem 0 0;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 0.62rem 0.45rem;
+        text-align: left;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+
+      th {
+        color: var(--muted);
+        font-size: 0.78rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      td {
+        font-size: 0.92rem;
+      }
+
+      tr.excluded {
+        color: #8794a1;
+      }
+
+      .token {
+        font-weight: 800;
+      }
+
+      .prob-cell {
+        min-width: 170px;
+      }
+
+      .prob-bar {
+        align-items: center;
+        display: grid;
+        gap: 0.55rem;
+        grid-template-columns: minmax(70px, 1fr) 3.5rem;
+      }
+
+      .track {
+        background: var(--excluded);
+        border-radius: 999px;
+        height: 0.6rem;
+        overflow: hidden;
+      }
+
+      .fill {
+        background: var(--blue);
+        display: block;
+        height: 100%;
+      }
+
+      tr.excluded .fill {
+        background: #b7c2cc;
+      }
+
+      .flag {
+        border-radius: 999px;
+        display: inline-block;
+        font-size: 0.78rem;
+        font-weight: 800;
+        padding: 0.18rem 0.5rem;
+      }
+
+      .flag.included {
+        background: #e7f5f3;
+        color: #0f766e;
+      }
+
+      .flag.excluded {
+        background: #eef1f4;
+        color: #697685;
+      }
+
+      .empty-row {
+        color: var(--muted);
+        white-space: normal;
+      }
+
+      @media (max-width: 900px) {
+        .demo,
+        .secondary-controls {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .topbar-inner,
+        .switch-row,
+        .range-row,
+        .select-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .page {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        select,
+        input[type="range"] {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="../index.html">LLM Evaluation for HPC Research</a>
+        <a href="../index.html#demos">Back to demos</a>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="intro" aria-labelledby="title">
+        <div>
+          <p class="eyebrow">Demo 1</p>
+          <h1 id="title">Where Randomness Enters Generation</h1>
+          <p class="lead">
+            This demo starts with one preset context and a fixed set of
+            next-token logits. You can also load SmolLM2 360M in the browser to
+            sample one token at a time from editable text.
+          </p>
+        </div>
+      </section>
+
+      <section class="demo" aria-label="Sampling controls and logits">
+        <div class="panel">
+          <h2>Context and Controls</h2>
+          <div class="control-stack">
+            <div class="switch-row">
+              <label class="switch">
+                <input id="localMode" type="checkbox" />
+                Use local LLM
+              </label>
+              <p class="status" id="modeStatus">Preset logits are active.</p>
+            </div>
+
+            <div>
+              <label for="contextText">Current text</label>
+              <textarea id="contextText" disabled></textarea>
+            </div>
+
+            <div class="select-row">
+              <label for="samplingMethod">Sampling method</label>
+              <select id="samplingMethod">
+                <option value="greedy">No sampling: choose highest probability</option>
+                <option value="random">Random: sample from all tokens</option>
+                <option value="topk">Top-k: sample from the k most likely tokens</option>
+                <option value="topp">Top-p: sample from the smallest high-probability set</option>
+              </select>
+            </div>
+
+            <div class="range-row">
+              <label for="temperature">Temperature</label>
+              <input id="temperature" type="range" min="0.2" max="2" step="0.05" value="1" />
+              <input id="temperatureValue" type="number" min="0.2" max="2" step="0.05" value="1" />
+            </div>
+
+            <div class="secondary-controls">
+              <div class="control-box">
+                <label for="topK">Top-k</label>
+                <input id="topK" type="number" min="1" max="10" step="1" value="3" />
+              </div>
+              <div class="control-box">
+                <label for="topP">Top-p</label>
+                <input id="topP" type="number" min="0.05" max="1" step="0.05" value="0.85" />
+              </div>
+            </div>
+
+            <div class="button-row">
+              <button id="loadModelButton" class="button secondary" type="button" hidden>
+                Load SmolLM2
+              </button>
+              <button id="sampleButton" class="button primary" type="button">Sample token</button>
+              <button id="appendButton" class="button secondary" type="button" disabled>
+                Append sampled token
+              </button>
+              <button id="resetButton" class="button secondary" type="button">Reset</button>
+            </div>
+          </div>
+
+          <div class="sample-box" aria-live="polite">
+            <span class="sample-label">Sampled token</span>
+            <span class="sample-token" id="sampledToken">None yet</span>
+            <p class="explain" id="sampleExplanation">
+              Press Sample token to draw once from the active distribution.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2 id="distributionTitle">Preset Next-Token Logits</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th id="scoreHeader">Logit</th>
+                  <th>Probability</th>
+                  <th id="setHeader">Sampling set</th>
+                </tr>
+              </thead>
+              <tbody id="logitRows"></tbody>
+            </table>
+          </div>
+          <p class="explain" id="distributionSummary"></p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const WLLAMA_VERSION = "3.5.1";
+      const WLLAMA_BASE_URL = `https://cdn.jsdelivr.net/npm/@wllama/wllama@${WLLAMA_VERSION}`;
+      const WLLAMA_MODULE_URL = `${WLLAMA_BASE_URL}/esm/index.js`;
+      const WLLAMA_PATH_CONFIG = {
+        default: `${WLLAMA_BASE_URL}/esm/wasm/wllama.wasm`,
+      };
+      const LOCAL_MODEL = {
+        name: "SmolLM2 360M",
+        repo: "HuggingFaceTB/SmolLM2-360M-Instruct-GGUF",
+        file: "smollm2-360m-instruct-q8_0.gguf",
+      };
+      const LOCAL_MODEL_URL = `https://huggingface.co/${LOCAL_MODEL.repo}/resolve/main/${LOCAL_MODEL.file}`;
+
+      const presetContext =
+        "def scale(values, factor):\n    result = []\n    for value in values:\n        result.append(value * factor)\n    ";
+
+      const presetLogits = [
+        { token: "return", logit: 4.25 },
+        { token: "if", logit: 2.8 },
+        { token: "for", logit: 2.15 },
+        { token: "result", logit: 1.85 },
+        { token: "print", logit: 1.15 },
+        { token: "values", logit: 0.75 },
+        { token: "None", logit: 0.2 },
+        { token: "raise", logit: -0.35 },
+      ];
+
+      const state = {
+        sampled: null,
+        wllama: null,
+        localRows: [],
+        localStatus: "idle",
+        isSampling: false,
+      };
+
+      const els = {
+        localMode: document.querySelector("#localMode"),
+        modeStatus: document.querySelector("#modeStatus"),
+        contextText: document.querySelector("#contextText"),
+        samplingMethod: document.querySelector("#samplingMethod"),
+        temperature: document.querySelector("#temperature"),
+        temperatureValue: document.querySelector("#temperatureValue"),
+        topK: document.querySelector("#topK"),
+        topP: document.querySelector("#topP"),
+        loadModelButton: document.querySelector("#loadModelButton"),
+        sampleButton: document.querySelector("#sampleButton"),
+        appendButton: document.querySelector("#appendButton"),
+        resetButton: document.querySelector("#resetButton"),
+        sampledToken: document.querySelector("#sampledToken"),
+        sampleExplanation: document.querySelector("#sampleExplanation"),
+        distributionTitle: document.querySelector("#distributionTitle"),
+        scoreHeader: document.querySelector("#scoreHeader"),
+        setHeader: document.querySelector("#setHeader"),
+        logitRows: document.querySelector("#logitRows"),
+        distributionSummary: document.querySelector("#distributionSummary"),
+      };
+
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, Number(value)));
+      }
+
+      function isLocalMode() {
+        return els.localMode.checked;
+      }
+
+      function isLocalReady() {
+        return Boolean(state.wllama?.isModelLoaded?.());
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function displayToken(token) {
+        if (token === undefined || token === null || token === "") {
+          return "(empty token)";
+        }
+        return JSON.stringify(String(token));
+      }
+
+      function setStatus(message, status = state.localStatus) {
+        state.localStatus = status;
+        els.modeStatus.textContent = message;
+      }
+
+      function createDisabledCacheManager() {
+        return {
+          clear: async () => {},
+          delete: async () => {},
+          deleteMany: async () => {},
+          download: async () => {
+            throw new Error("Model caching is disabled for this demo.");
+          },
+          getMetadata: async () => null,
+          getNameFromURL: async (url) => url,
+          getSize: async () => -1,
+          list: async () => [],
+          open: async () => null,
+          write: async () => {},
+          writeMetadata: async () => {},
+        };
+      }
+
+      function createDisabledModelManager() {
+        return {
+          clear: async () => {},
+          downloadModel: async () => {
+            throw new Error("Model caching is disabled for this demo.");
+          },
+          getModelOrDownload: async () => {
+            throw new Error("Model caching is disabled for this demo.");
+          },
+          getModels: async () => [],
+          loadModel: async () => {
+            throw new Error("Model caching is disabled for this demo.");
+          },
+        };
+      }
+
+      async function fetchModelBlob() {
+        const response = await fetch(LOCAL_MODEL_URL);
+        if (!response.ok || !response.body) {
+          throw new Error(`Failed to fetch model: HTTP ${response.status}`);
+        }
+
+        const total = Number(response.headers.get("content-length")) || 0;
+        const reader = response.body.getReader();
+        const chunks = [];
+        let loaded = 0;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) {
+            break;
+          }
+          chunks.push(value);
+          loaded += value.byteLength;
+          const percent = total ? Math.round((loaded / total) * 100) : null;
+          setStatus(
+            percent === null
+              ? `Downloading ${LOCAL_MODEL.file}: ${(loaded / 1024 / 1024).toFixed(1)} MB.`
+              : `Downloading ${LOCAL_MODEL.file}: ${percent}%.`,
+            "loading",
+          );
+        }
+
+        return new Blob(chunks, { type: "application/octet-stream" });
+      }
+
+      function softmax(items, temperature) {
+        const scaled = items.map((item) => item.logit / temperature);
+        const max = Math.max(...scaled);
+        const weights = scaled.map((value) => Math.exp(value - max));
+        const total = weights.reduce((sum, value) => sum + value, 0);
+        return items.map((item, index) => ({
+          ...item,
+          baseProbability: weights[index] / total,
+        }));
+      }
+
+      function activeDistribution() {
+        const temperature = clamp(els.temperature.value, 0.2, 2);
+        const method = els.samplingMethod.value;
+        const withProbabilities = softmax(presetLogits, temperature).sort(
+          (a, b) => b.baseProbability - a.baseProbability,
+        );
+
+        let includedTokens = new Set(withProbabilities.map((item) => item.token));
+
+        if (method === "greedy") {
+          includedTokens = new Set([withProbabilities[0].token]);
+        }
+
+        if (method === "topk") {
+          const k = clamp(els.topK.value, 1, presetLogits.length);
+          includedTokens = new Set(withProbabilities.slice(0, k).map((item) => item.token));
+        }
+
+        if (method === "topp") {
+          const p = clamp(els.topP.value, 0.05, 1);
+          let cumulative = 0;
+          const tokens = [];
+          for (const item of withProbabilities) {
+            tokens.push(item.token);
+            cumulative += item.baseProbability;
+            if (cumulative >= p) {
+              break;
+            }
+          }
+          includedTokens = new Set(tokens);
+        }
+
+        const activeTotal = withProbabilities.reduce((sum, item) => {
+          return includedTokens.has(item.token) ? sum + item.baseProbability : sum;
+        }, 0);
+
+        return withProbabilities.map((item) => {
+          const included = includedTokens.has(item.token);
+          return {
+            ...item,
+            included,
+            sampleProbability: included ? item.baseProbability / activeTotal : 0,
+          };
+        });
+      }
+
+      function formatPercent(value) {
+        return `${(value * 100).toFixed(value < 0.01 && value > 0 ? 2 : 1)}%`;
+      }
+
+      function renderDistribution() {
+        if (isLocalMode()) {
+          renderLocalDistribution();
+        } else {
+          renderPresetDistribution();
+        }
+        updateControls();
+      }
+
+      function renderPresetDistribution() {
+        const distribution = activeDistribution();
+        const method = els.samplingMethod.value;
+        const activeCount = distribution.filter((item) => item.included).length;
+
+        els.distributionTitle.textContent = "Preset Next-Token Logits";
+        els.scoreHeader.textContent = "Logit";
+        els.setHeader.textContent = "Sampling set";
+
+        els.logitRows.innerHTML = distribution
+          .map((item) => {
+            const width = Math.max(item.sampleProbability * 100, item.included ? 1 : 0);
+            const rowClass = item.included ? "" : " class=\"excluded\"";
+            const flag = item.included
+              ? "<span class=\"flag included\">included</span>"
+              : "<span class=\"flag excluded\">excluded</span>";
+            return `
+              <tr${rowClass}>
+                <td class="token">${escapeHtml(displayToken(item.token))}</td>
+                <td>${item.logit.toFixed(2)}</td>
+                <td class="prob-cell">
+                  <div class="prob-bar">
+                    <span class="track"><span class="fill" style="width: ${width}%"></span></span>
+                    <span>${formatPercent(item.sampleProbability)}</span>
+                  </div>
+                </td>
+                <td>${flag}</td>
+              </tr>
+            `;
+          })
+          .join("");
+
+        els.distributionSummary.textContent =
+          method === "greedy"
+            ? "No sampling chooses the highest-probability token every time."
+            : `${activeCount} token${activeCount === 1 ? "" : "s"} are available to the sampler after filtering.`;
+      }
+
+      function renderLocalDistribution() {
+        els.distributionTitle.textContent = "Top Token Log Probabilities";
+        els.scoreHeader.textContent = "Log probability";
+        els.setHeader.textContent = "Sampling set";
+
+        if (state.localRows.length === 0) {
+          const message = isLocalReady()
+            ? "Sample a token to show the top log probabilities reported by wllama."
+            : `Load ${LOCAL_MODEL.name} before sampling from browser-generated probabilities.`;
+          els.logitRows.innerHTML = `<tr><td class="empty-row" colspan="4">${escapeHtml(message)}</td></tr>`;
+          els.distributionSummary.textContent =
+            "Local mode uses top log probabilities from the completion API rather than raw full-vocabulary logits.";
+          return;
+        }
+
+        const distribution = activeLocalDistribution();
+        const activeCount = distribution.filter((item) => item.included).length;
+
+        els.logitRows.innerHTML = distribution
+          .map((item) => {
+            const width = Math.max(item.sampleProbability * 100, item.included ? 1 : 0);
+            const rowClass = item.included ? "" : " class=\"excluded\"";
+            const flag = item.included
+              ? "<span class=\"flag included\">included</span>"
+              : "<span class=\"flag excluded\">excluded</span>";
+            return `
+              <tr${rowClass}>
+                <td class="token">${escapeHtml(displayToken(item.token))}</td>
+                <td>${Number.isFinite(item.logprob) ? item.logprob.toFixed(3) : "n/a"}</td>
+                <td class="prob-cell">
+                  <div class="prob-bar">
+                    <span class="track"><span class="fill" style="width: ${width}%"></span></span>
+                    <span>${formatPercent(item.sampleProbability)}</span>
+                  </div>
+                </td>
+                <td>${flag}</td>
+              </tr>
+            `;
+          })
+          .join("");
+
+        els.distributionSummary.textContent =
+          els.samplingMethod.value === "greedy"
+            ? "No sampling chooses the highest-probability reported token every time."
+            : `${activeCount} reported token${activeCount === 1 ? "" : "s"} are available after applying the selected sampling rule.`;
+      }
+
+      function activeLocalDistribution() {
+        const method = els.samplingMethod.value;
+        const sorted = [...state.localRows].sort((a, b) => b.probability - a.probability);
+        const visibleTotal = sorted.reduce((sum, item) => sum + item.probability, 0) || 1;
+        const withBaseProbabilities = sorted.map((item) => ({
+          ...item,
+          baseProbability: item.probability / visibleTotal,
+        }));
+
+        let includedTokens = new Set(withBaseProbabilities.map((item) => item.token));
+
+        if (method === "greedy") {
+          includedTokens = new Set([withBaseProbabilities[0]?.token]);
+        }
+
+        if (method === "topk") {
+          const k = clamp(els.topK.value, 1, withBaseProbabilities.length);
+          includedTokens = new Set(withBaseProbabilities.slice(0, k).map((item) => item.token));
+        }
+
+        if (method === "topp") {
+          const p = clamp(els.topP.value, 0.05, 1);
+          let cumulative = 0;
+          const tokens = [];
+          for (const item of withBaseProbabilities) {
+            tokens.push(item.token);
+            cumulative += item.baseProbability;
+            if (cumulative >= p) {
+              break;
+            }
+          }
+          includedTokens = new Set(tokens);
+        }
+
+        const activeTotal =
+          withBaseProbabilities.reduce((sum, item) => {
+            return includedTokens.has(item.token) ? sum + item.baseProbability : sum;
+          }, 0) || 1;
+
+        return withBaseProbabilities.map((item) => {
+          const included = includedTokens.has(item.token);
+          return {
+            ...item,
+            included,
+            sampleProbability: included ? item.baseProbability / activeTotal : 0,
+          };
+        });
+      }
+
+      async function sampleToken() {
+        if (isLocalMode()) {
+          await sampleLocalToken();
+        } else {
+          samplePresetToken();
+        }
+      }
+
+      function samplePresetToken() {
+        const distribution = activeDistribution();
+        let selected = distribution.find((item) => item.included);
+
+        if (els.samplingMethod.value !== "greedy") {
+          const draw = Math.random();
+          let cumulative = 0;
+          for (const item of distribution) {
+            cumulative += item.sampleProbability;
+            if (draw <= cumulative) {
+              selected = item;
+              break;
+            }
+          }
+        }
+
+        state.sampled = selected;
+        els.sampledToken.textContent = displayToken(selected.token);
+        els.sampleExplanation.textContent = `${displayToken(selected.token)} was selected with ${formatPercent(
+          selected.sampleProbability,
+        )} probability under the current settings.`;
+        updateControls();
+      }
+
+      function buildLocalCompletionOptions() {
+        const method = els.samplingMethod.value;
+        const temperature = clamp(els.temperature.value, 0.2, 2);
+        const options = {
+          prompt: els.contextText.value,
+          max_tokens: 1,
+          logprobs: 10,
+          n_probs: 10,
+          echo: false,
+        };
+
+        if (method === "greedy") {
+          options.temperature = 0;
+          options.top_k = 1;
+          return options;
+        }
+
+        options.temp = temperature;
+
+        if (method === "random") {
+          options.top_k = 0;
+          options.top_p = 1;
+        }
+
+        if (method === "topk") {
+          options.top_k = clamp(els.topK.value, 1, 100);
+          options.top_p = 1;
+        }
+
+        if (method === "topp") {
+          options.top_k = 0;
+          options.top_p = clamp(els.topP.value, 0.05, 1);
+        }
+
+        return options;
+      }
+
+      function rowsFromLocalResponse(response) {
+        const choice = response?.choices?.[0] ?? {};
+        const contentLogprob = choice.logprobs?.content?.[0] ?? null;
+        const probabilityBlock =
+          response?.completion_probabilities?.[0] ??
+          choice?.completion_probabilities?.[0] ??
+          response?.probabilities?.[0] ??
+          choice?.probabilities?.[0] ??
+          null;
+        const llamaCppProbs = Array.isArray(probabilityBlock?.probs)
+          ? probabilityBlock.probs
+          : [];
+        const rawToken =
+          choice.text ??
+          choice.logprobs?.tokens?.[0] ??
+          contentLogprob?.token ??
+          probabilityBlock?.content ??
+          response?.content ??
+          "";
+        const selectedLogprob =
+          choice.logprobs?.token_logprobs?.[0] ?? contentLogprob?.logprob;
+        const rawTopLogprobs = choice.logprobs?.top_logprobs?.[0] ?? {};
+        const contentTopLogprobs = Array.isArray(contentLogprob?.top_logprobs)
+          ? contentLogprob.top_logprobs
+          : [];
+        const entries = contentTopLogprobs.map((item) => {
+          const logprob = Number(item.logprob);
+          return {
+            token: item.token,
+            logprob,
+            probability: Number.isFinite(logprob)
+              ? Math.min(1, Math.max(0, Math.exp(logprob)))
+              : 0,
+          };
+        });
+
+        for (const [token, logprob] of Object.entries(rawTopLogprobs)) {
+          if (!entries.some((entry) => entry.token === token)) {
+            const numericLogprob = Number(logprob);
+            entries.push({
+              token,
+              logprob: numericLogprob,
+              probability: Number.isFinite(numericLogprob)
+                ? Math.min(1, Math.max(0, Math.exp(numericLogprob)))
+                : 0,
+            });
+          }
+        }
+
+        for (const item of llamaCppProbs) {
+          const token = item.tok_str ?? item.token ?? item.content ?? item.text;
+          const probability = Number(item.prob ?? item.p);
+          const itemLogprob = Number(item.logprob);
+          const logprob = Number.isFinite(itemLogprob)
+            ? itemLogprob
+            : Number.isFinite(probability) && probability > 0
+              ? Math.log(probability)
+              : NaN;
+          if (token !== undefined && !entries.some((entry) => entry.token === token)) {
+            entries.push({
+              token,
+              logprob,
+              probability: Number.isFinite(probability)
+                ? Math.min(1, Math.max(0, probability))
+                : Number.isFinite(logprob)
+                  ? Math.min(1, Math.max(0, Math.exp(logprob)))
+                  : 0,
+            });
+          }
+        }
+
+        if (rawToken && !entries.some((item) => item.token === rawToken)) {
+          entries.push({
+            token: rawToken,
+            logprob: Number(selectedLogprob),
+            probability: Number.isFinite(selectedLogprob)
+              ? Math.min(1, Math.max(0, Math.exp(Number(selectedLogprob))))
+              : 0,
+          });
+        }
+
+        entries.sort((a, b) => {
+          const left = Number.isFinite(a.logprob) ? a.logprob : -Infinity;
+          const right = Number.isFinite(b.logprob) ? b.logprob : -Infinity;
+          return right - left;
+        });
+
+        return {
+          rawToken,
+          selectedLogprob: Number.isFinite(selectedLogprob)
+            ? Number(selectedLogprob)
+            : entries.find((item) => item.token === rawToken)?.logprob,
+          rows: entries.slice(0, 10),
+        };
+      }
+
+      async function sampleLocalToken() {
+        if (!isLocalReady() || state.isSampling) {
+          return;
+        }
+
+        state.isSampling = true;
+        state.sampled = null;
+        state.localRows = [];
+        els.sampledToken.textContent = "Sampling...";
+        els.sampleExplanation.textContent = `Requesting one token from ${LOCAL_MODEL.name}.`;
+        setStatus(`Sampling one token with ${LOCAL_MODEL.name}.`, "sampling");
+        updateControls();
+        renderLocalDistribution();
+
+        try {
+          const completionOptions = buildLocalCompletionOptions();
+          const response = await state.wllama.createCompletion(completionOptions);
+          const result = rowsFromLocalResponse(response);
+          state.localRows = result.rows;
+          state.sampled = {
+            token: result.rawToken,
+            rawToken: result.rawToken,
+            sampleProbability: Number.isFinite(result.selectedLogprob)
+              ? Math.min(1, Math.max(0, Math.exp(result.selectedLogprob)))
+              : 0,
+          };
+          els.sampledToken.textContent = displayToken(result.rawToken);
+          els.sampleExplanation.textContent = Number.isFinite(result.selectedLogprob)
+            ? `${displayToken(result.rawToken)} was sampled by ${LOCAL_MODEL.name}. Its reported probability is ${formatPercent(
+                Math.exp(result.selectedLogprob),
+              )}.`
+            : `${displayToken(result.rawToken)} was sampled by ${LOCAL_MODEL.name}.`;
+          setStatus(`${LOCAL_MODEL.name} is ready.`, "ready");
+        } catch (error) {
+          state.localRows = [];
+          state.sampled = null;
+          els.sampledToken.textContent = "None yet";
+          els.sampleExplanation.textContent = "Sampling failed. Preset mode is still available.";
+          setStatus(`Local sampling error: ${error.message || error}`, "error");
+        } finally {
+          state.isSampling = false;
+          renderDistribution();
+        }
+      }
+
+      function syncTemperature(source) {
+        const value = clamp(source.value, 0.2, 2);
+        els.temperature.value = value;
+        els.temperatureValue.value = value;
+        renderDistribution();
+      }
+
+      function updateMode() {
+        const localMode = els.localMode.checked;
+        state.sampled = null;
+        state.localRows = [];
+        els.sampledToken.textContent = "None yet";
+        els.sampleExplanation.textContent = localMode
+          ? `Load ${LOCAL_MODEL.name}, then sample one token from the editable text.`
+          : "Press Sample token to draw once from the active distribution.";
+        if (localMode) {
+          setStatus(
+            isLocalReady()
+              ? `${LOCAL_MODEL.name} is ready.`
+              : `Local mode is idle. Load ${LOCAL_MODEL.name} to enable sampling.`,
+            isLocalReady() ? "ready" : "idle",
+          );
+        } else {
+          setStatus("Preset logits are active.", "idle");
+        }
+        renderDistribution();
+      }
+
+      function updateControls() {
+        const method = els.samplingMethod.value;
+        const localMode = isLocalMode();
+        const localReady = isLocalReady();
+        const busy = state.localStatus === "loading" || state.isSampling;
+
+        els.contextText.disabled = !localMode || busy;
+        els.loadModelButton.hidden = !localMode || localReady;
+        els.loadModelButton.disabled = busy;
+        els.sampleButton.disabled = localMode ? !localReady || busy : false;
+        els.appendButton.disabled = !localMode || busy || !state.sampled;
+        els.resetButton.disabled = busy;
+        els.localMode.disabled = busy;
+        els.samplingMethod.disabled = busy;
+        els.temperature.disabled = busy;
+        els.temperatureValue.disabled = busy;
+        els.topK.disabled = busy || method !== "topk";
+        els.topP.disabled = busy || method !== "topp";
+      }
+
+      async function loadLocalModel() {
+        if (isLocalReady() || state.localStatus === "loading") {
+          return;
+        }
+
+        try {
+          setStatus("Loading wllama module.", "loading");
+          updateControls();
+          const { Wllama, LoggerWithoutDebug } = await import(WLLAMA_MODULE_URL);
+
+          state.wllama = new Wllama(WLLAMA_PATH_CONFIG, {
+            cacheManager: createDisabledCacheManager(),
+            logger: LoggerWithoutDebug,
+            modelManager: createDisabledModelManager(),
+            suppressNativeLog: true,
+          });
+
+          setStatus(`Downloading ${LOCAL_MODEL.file}: 0%.`, "loading");
+          const modelBlob = await fetchModelBlob();
+          setStatus(`Loading ${LOCAL_MODEL.name} into wllama.`, "loading");
+          await state.wllama.loadModel([modelBlob], {
+            n_gpu_layers: 0,
+            n_threads: 1,
+          });
+
+          setStatus(`${LOCAL_MODEL.name} is ready.`, "ready");
+        } catch (error) {
+          state.wllama = null;
+          setStatus(`Local model error: ${error.message || error}`, "error");
+          els.sampleExplanation.textContent =
+            `${LOCAL_MODEL.name} could not be loaded. Switch off local mode to keep using preset logits.`;
+        } finally {
+          renderDistribution();
+        }
+      }
+
+      function appendSampledToken() {
+        if (!isLocalMode() || !state.sampled?.rawToken) {
+          return;
+        }
+
+        els.contextText.value += state.sampled.rawToken;
+        state.sampled = null;
+        state.localRows = [];
+        els.sampledToken.textContent = "None yet";
+        els.sampleExplanation.textContent =
+          "The sampled token was appended. Sample again to get the next token.";
+        renderDistribution();
+      }
+
+      function resetDemo() {
+        state.sampled = null;
+        state.localRows = [];
+        els.contextText.value = presetContext;
+        els.sampledToken.textContent = "None yet";
+        els.sampleExplanation.textContent =
+          isLocalMode()
+            ? `Load ${LOCAL_MODEL.name}, then sample one token from the editable text.`
+            : "Press Sample token to draw once from the active distribution.";
+        if (isLocalMode()) {
+          setStatus(
+            isLocalReady()
+              ? `${LOCAL_MODEL.name} is ready.`
+              : `Local mode is idle. Load ${LOCAL_MODEL.name} to enable sampling.`,
+            isLocalReady() ? "ready" : "idle",
+          );
+        } else {
+          setStatus("Preset logits are active.", "idle");
+        }
+        renderDistribution();
+      }
+
+      els.localMode.addEventListener("change", updateMode);
+      els.samplingMethod.addEventListener("change", renderDistribution);
+      els.temperature.addEventListener("input", () => syncTemperature(els.temperature));
+      els.temperatureValue.addEventListener("input", () => syncTemperature(els.temperatureValue));
+      els.topK.addEventListener("input", renderDistribution);
+      els.topP.addEventListener("input", renderDistribution);
+      els.sampleButton.addEventListener("click", sampleToken);
+      els.loadModelButton.addEventListener("click", loadLocalModel);
+      els.appendButton.addEventListener("click", appendSampledToken);
+      els.resetButton.addEventListener("click", resetDemo);
+
+      resetDemo();
+    </script>
+  </body>
+</html>
