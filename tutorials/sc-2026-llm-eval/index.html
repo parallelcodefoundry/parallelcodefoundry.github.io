@@ -6,7 +6,7 @@
     <title>Rigorous Evaluation of LLM Components in HPC Research</title>
     <meta
       name="description"
-      content="Tutorial materials for Rigorous Evaluation of LLM Components in HPC Research at ISC 2026."
+      content="Tutorial materials for Rigorous Evaluation of LLM Components in HPC Research at SC26."
     />
     <style>
       :root {
@@ -222,6 +222,16 @@
         color: #ffffff;
       }
 
+      .button:disabled,
+      .button:disabled:hover {
+        background: #e8edf1;
+        border-color: #c6cfd7;
+        color: #5d6b78;
+        cursor: not-allowed;
+        font-family: inherit;
+        font-size: inherit;
+      }
+
       .section {
         margin: 0 auto;
         max-width: 1120px;
@@ -396,7 +406,7 @@
       <main>
         <section class="hero" aria-labelledby="page-title">
           <div class="hero-inner">
-            <p class="eyebrow">ISC 2026 Tutorial</p>
+            <p class="eyebrow">SC26 Tutorial</p>
             <h1 id="page-title">Rigorous Evaluation of LLM Components in HPC Research</h1>
             <p class="hero-copy">
               A hands-on tutorial on evaluating LLMs and LLM-based research
@@ -406,23 +416,23 @@
             <div class="event-summary" aria-label="Event details">
               <div class="event-detail">
                 <span class="event-label">Date and Time</span>
-                <strong>Monday, June 22, 2026</strong>
-                <p>2:00 PM to 6:00 PM (Europe/Berlin)</p>
+                <strong>Monday, November 16, 2026</strong>
+                <p>8:30 AM to 12:00 PM CST (UTC−6)</p>
               </div>
               <div class="event-detail">
                 <span class="event-label">Location</span>
-                <strong>Hall X12</strong>
-                <p>1st Floor</p>
+                <strong>Room W184b-c</strong>
+                <p><a href="https://sc26.conference-program.com/presentation/?id=tut165&amp;sess=sess172">Official SC26 program</a></p>
               </div>
               <div class="event-detail">
                 <span class="event-label">Session</span>
                 <strong>Tutorial</strong>
-                <p>4 hours</p>
+                <p>3.5 hours</p>
               </div>
             </div>
             <div class="actions">
-              <a class="button primary" href="../slides/slides.pdf">Open slides</a>
-              <a class="button secondary" href="#demos">View demos</a>
+              <a class="button primary" href="../../assets/presentations/rigorous-llm-tutorial-sc-2026.pdf">Open slides</a>
+              <button class="button secondary" type="button" disabled>Demos coming soon</button>
             </div>
           </div>
         </section>
@@ -514,7 +524,7 @@
                 Tutorial outline, lecture content, and hands-on evaluation
                 examples.
               </p>
-              <a href="../slides/slides.pdf">Open slides</a>
+              <a href="../../assets/presentations/rigorous-llm-tutorial-sc-2026.pdf">Open slides</a>
             </div>
           </div>
         </section>
@@ -523,8 +533,8 @@
           <div class="section-heading">
             <h2 id="demos-title">Hands-On Demos</h2>
             <p>
-              Each demo isolates one evaluation idea from the slides and keeps
-              the moving parts small enough to inspect during the tutorial.
+              Demos are being updated for SC26 and are not yet available.
+              Each demo will isolate one evaluation idea from the slides.
             </p>
           </div>
 
@@ -536,7 +546,7 @@
                 Inspect preset next-token logits and compare temperature,
                 random sampling, top-k, top-p, and greedy decoding.
               </p>
-              <a class="card-link" href="demos/sampling.html">Open demo</a>
+              <button class="button secondary card-link" type="button" disabled>Demo coming soon</button>
             </article>
 
             <article class="demo-card">
@@ -546,7 +556,7 @@
                 Run a tiny local agent, inspect its trace, and optionally replay
                 a recorded OpenAI HTTP response.
               </p>
-              <a class="card-link" href="demos/http-replay-agent.html">Open demo</a>
+              <button class="button secondary card-link" type="button" disabled>Demo coming soon</button>
             </article>
 
             <article class="demo-card">
@@ -556,7 +566,7 @@
                 Estimate the probability that a model produces a correct output
                 instead of reporting a single sampled answer.
               </p>
-              <a class="card-link" href="demos/probabilistic-metrics.html">Open demo</a>
+              <button class="button secondary card-link" type="button" disabled>Demo coming soon</button>
             </article>
           </div>
         </section>
@@ -565,7 +575,7 @@
       <footer>
         <p>
           Rigorous Evaluation of LLM Components in HPC Research. Tutorial
-          materials for ISC 2026.
+          materials for SC26.
         </p>
       </footer>
     </div>
