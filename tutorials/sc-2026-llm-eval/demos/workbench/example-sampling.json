@@ -1,0 +1,498 @@
+{
+  "format": "sc26-workbench-v1",
+  "dataset": {
+    "id": "sc26-sampling-practice",
+    "version": "practice-1",
+    "kind": "synthetic",
+    "model": null,
+    "evaluator": "authored-correctness-v1",
+    "checker": null,
+    "limitations": [
+      "Synthetic practice data, authored for this tutorial; no model was queried.",
+      "Correctness and public-check outcomes are authored fixture labels.",
+      "Token usage, elapsed time, model configuration, and monetary cost are unavailable.",
+      "Replaying the same finite pool does not create new independent model samples.",
+      "Authentic model records and their provenance remain to be added."
+    ]
+  },
+  "settings": {
+    "mode": "sampling",
+    "split": "development",
+    "seed": 2026,
+    "trials": 20,
+    "policies": [
+      {
+        "name": "One shot",
+        "budget": 1,
+        "stopping": "budget",
+        "agreement": 2,
+        "selection": "first"
+      },
+      {
+        "name": "Vote over attempts",
+        "budget": 8,
+        "stopping": "budget",
+        "agreement": 2,
+        "selection": "vote"
+      }
+    ]
+  },
+  "result": {
+    "engineVersion": "1.1.0",
+    "diagnostic": null,
+    "dataset": {
+      "id": "sc26-sampling-practice",
+      "version": "practice-1",
+      "kind": "synthetic",
+      "model": null,
+      "evaluator": "authored-correctness-v1",
+      "checker": null,
+      "limitations": [
+        "Synthetic practice data, authored for this tutorial; no model was queried.",
+        "Correctness and public-check outcomes are authored fixture labels.",
+        "Token usage, elapsed time, model configuration, and monetary cost are unavailable.",
+        "Replaying the same finite pool does not create new independent model samples.",
+        "Authentic model records and their provenance remain to be added."
+      ]
+    },
+    "settings": {
+      "mode": "sampling",
+      "split": "development",
+      "seed": 2026,
+      "trials": 20,
+      "policies": [
+        {
+          "name": "One shot",
+          "budget": 1,
+          "stopping": "budget",
+          "agreement": 2,
+          "selection": "first"
+        },
+        {
+          "name": "Vote over attempts",
+          "budget": 8,
+          "stopping": "budget",
+          "agreement": 2,
+          "selection": "vote"
+        }
+      ]
+    },
+    "taskIds": [
+      "blocks",
+      "periodic",
+      "halo",
+      "mean",
+      "csr",
+      "speedup"
+    ],
+    "requestedRuns": 120,
+    "matchedRuns": 120,
+    "excludedPairs": 0,
+    "summaries": [
+      {
+        "name": "One shot",
+        "runs": 120,
+        "scored": 120,
+        "unsupported": 0,
+        "unscorable": 0,
+        "success": 0.4583333333333333,
+        "coverage": 0.4583333333333333,
+        "gap": 0,
+        "abstentions": 0,
+        "meanCalls": 1,
+        "meanChecks": 0,
+        "meanTokens": null,
+        "missingTokenRecords": 120,
+        "invalidAnswers": 7,
+        "transitions": {
+          "recovery": 0,
+          "regression": 0,
+          "stayedCorrect": 55,
+          "stayedIncorrect": 65,
+          "unknownInitial": 0
+        },
+        "attempted": {
+          "runs": 120,
+          "scored": 120,
+          "unsupported": 0,
+          "unscorable": 0,
+          "success": 0.4583333333333333,
+          "coverage": 0.4583333333333333,
+          "gap": 0,
+          "abstentions": 0,
+          "meanCalls": 1,
+          "meanChecks": 0,
+          "meanTokens": null,
+          "missingTokenRecords": 120,
+          "invalidAnswers": 7,
+          "transitions": {
+            "recovery": 0,
+            "regression": 0,
+            "stayedCorrect": 55,
+            "stayedIncorrect": 65,
+            "unknownInitial": 0
+          }
+        }
+      },
+      {
+        "name": "Vote over attempts",
+        "runs": 120,
+        "scored": 120,
+        "unsupported": 0,
+        "unscorable": 0,
+        "success": 0.5583333333333333,
+        "coverage": 1,
+        "gap": 0.44166666666666665,
+        "abstentions": 0,
+        "meanCalls": 8,
+        "meanChecks": 0,
+        "meanTokens": null,
+        "missingTokenRecords": 960,
+        "invalidAnswers": 40,
+        "transitions": {
+          "recovery": 21,
+          "regression": 9,
+          "stayedCorrect": 46,
+          "stayedIncorrect": 44,
+          "unknownInitial": 0
+        },
+        "attempted": {
+          "runs": 120,
+          "scored": 120,
+          "unsupported": 0,
+          "unscorable": 0,
+          "success": 0.5583333333333333,
+          "coverage": 1,
+          "gap": 0.44166666666666665,
+          "abstentions": 0,
+          "meanCalls": 8,
+          "meanChecks": 0,
+          "meanTokens": null,
+          "missingTokenRecords": 960,
+          "invalidAnswers": 40,
+          "transitions": {
+            "recovery": 21,
+            "regression": 9,
+            "stayedCorrect": 46,
+            "stayedIncorrect": 44,
+            "unknownInitial": 0
+          }
+        }
+      }
+    ],
+    "baseline": {
+      "runs": 120,
+      "scored": 120,
+      "unsupported": 0,
+      "unscorable": 0,
+      "success": 0.4583333333333333,
+      "coverage": 0.4583333333333333,
+      "gap": 0,
+      "abstentions": 0,
+      "meanCalls": 1,
+      "meanChecks": 0,
+      "meanTokens": null,
+      "missingTokenRecords": 120,
+      "invalidAnswers": 7,
+      "transitions": {
+        "recovery": 0,
+        "regression": 0,
+        "stayedCorrect": 55,
+        "stayedIncorrect": 65,
+        "unknownInitial": 0
+      }
+    },
+    "difference": 0.10000000000000003,
+    "changedFactors": [
+      "budget",
+      "selection"
+    ],
+    "trialResults": [
+      {
+        "trial": 0,
+        "runs": 6,
+        "success": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "trial": 1,
+        "runs": 6,
+        "success": [
+          0.3333333333333333,
+          0.5
+        ]
+      },
+      {
+        "trial": 2,
+        "runs": 6,
+        "success": [
+          0.3333333333333333,
+          0.5
+        ]
+      },
+      {
+        "trial": 3,
+        "runs": 6,
+        "success": [
+          0.3333333333333333,
+          0.5
+        ]
+      },
+      {
+        "trial": 4,
+        "runs": 6,
+        "success": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "trial": 5,
+        "runs": 6,
+        "success": [
+          0.6666666666666666,
+          0.5
+        ]
+      },
+      {
+        "trial": 6,
+        "runs": 6,
+        "success": [
+          0.5,
+          0.6666666666666666
+        ]
+      },
+      {
+        "trial": 7,
+        "runs": 6,
+        "success": [
+          0.6666666666666666,
+          0.6666666666666666
+        ]
+      },
+      {
+        "trial": 8,
+        "runs": 6,
+        "success": [
+          0.3333333333333333,
+          0.5
+        ]
+      },
+      {
+        "trial": 9,
+        "runs": 6,
+        "success": [
+          0.6666666666666666,
+          0.6666666666666666
+        ]
+      },
+      {
+        "trial": 10,
+        "runs": 6,
+        "success": [
+          0.3333333333333333,
+          0.6666666666666666
+        ]
+      },
+      {
+        "trial": 11,
+        "runs": 6,
+        "success": [
+          0.6666666666666666,
+          0.6666666666666666
+        ]
+      },
+      {
+        "trial": 12,
+        "runs": 6,
+        "success": [
+          0.3333333333333333,
+          0.5
+        ]
+      },
+      {
+        "trial": 13,
+        "runs": 6,
+        "success": [
+          0.3333333333333333,
+          0.5
+        ]
+      },
+      {
+        "trial": 14,
+        "runs": 6,
+        "success": [
+          0.6666666666666666,
+          0.5
+        ]
+      },
+      {
+        "trial": 15,
+        "runs": 6,
+        "success": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "trial": 16,
+        "runs": 6,
+        "success": [
+          0.16666666666666666,
+          0.6666666666666666
+        ]
+      },
+      {
+        "trial": 17,
+        "runs": 6,
+        "success": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "trial": 18,
+        "runs": 6,
+        "success": [
+          0.3333333333333333,
+          0.5
+        ]
+      },
+      {
+        "trial": 19,
+        "runs": 6,
+        "success": [
+          0.5,
+          0.6666666666666666
+        ]
+      }
+    ],
+    "sweep": [
+      {
+        "budget": 1,
+        "runs": 120,
+        "scored": 120,
+        "unsupported": 0,
+        "unscorable": 0,
+        "success": 0.4583333333333333,
+        "coverage": 0.4583333333333333,
+        "gap": 0,
+        "abstentions": 7,
+        "meanCalls": 1,
+        "meanChecks": 0,
+        "meanTokens": null,
+        "missingTokenRecords": 120,
+        "invalidAnswers": 7,
+        "transitions": {
+          "recovery": 0,
+          "regression": 0,
+          "stayedCorrect": 55,
+          "stayedIncorrect": 65,
+          "unknownInitial": 0
+        }
+      },
+      {
+        "budget": 2,
+        "runs": 120,
+        "scored": 120,
+        "unsupported": 0,
+        "unscorable": 0,
+        "success": 0.48333333333333334,
+        "coverage": 0.775,
+        "gap": 0.2916666666666667,
+        "abstentions": 0,
+        "meanCalls": 2,
+        "meanChecks": 0,
+        "meanTokens": null,
+        "missingTokenRecords": 240,
+        "invalidAnswers": 14,
+        "transitions": {
+          "recovery": 3,
+          "regression": 0,
+          "stayedCorrect": 55,
+          "stayedIncorrect": 62,
+          "unknownInitial": 0
+        }
+      },
+      {
+        "budget": 4,
+        "runs": 120,
+        "scored": 120,
+        "unsupported": 0,
+        "unscorable": 0,
+        "success": 0.6333333333333333,
+        "coverage": 0.9,
+        "gap": 0.2666666666666667,
+        "abstentions": 0,
+        "meanCalls": 4,
+        "meanChecks": 0,
+        "meanTokens": null,
+        "missingTokenRecords": 480,
+        "invalidAnswers": 22,
+        "transitions": {
+          "recovery": 22,
+          "regression": 1,
+          "stayedCorrect": 54,
+          "stayedIncorrect": 43,
+          "unknownInitial": 0
+        }
+      },
+      {
+        "budget": 6,
+        "runs": 120,
+        "scored": 120,
+        "unsupported": 0,
+        "unscorable": 0,
+        "success": 0.65,
+        "coverage": 1,
+        "gap": 0.35,
+        "abstentions": 0,
+        "meanCalls": 6,
+        "meanChecks": 0,
+        "meanTokens": null,
+        "missingTokenRecords": 720,
+        "invalidAnswers": 35,
+        "transitions": {
+          "recovery": 29,
+          "regression": 6,
+          "stayedCorrect": 49,
+          "stayedIncorrect": 36,
+          "unknownInitial": 0
+        }
+      },
+      {
+        "budget": 8,
+        "runs": 120,
+        "scored": 120,
+        "unsupported": 0,
+        "unscorable": 0,
+        "success": 0.5583333333333333,
+        "coverage": 1,
+        "gap": 0.44166666666666665,
+        "abstentions": 0,
+        "meanCalls": 8,
+        "meanChecks": 0,
+        "meanTokens": null,
+        "missingTokenRecords": 960,
+        "invalidAnswers": 40,
+        "transitions": {
+          "recovery": 21,
+          "regression": 9,
+          "stayedCorrect": 46,
+          "stayedIncorrect": 44,
+          "unknownInitial": 0
+        }
+      }
+    ],
+    "protocol": {
+      "sampling": "Seeded shuffle without replacement within a run; the pool is reused across replay trials.",
+      "pairing": "Same task, trial seed, and initial sample. Exclude a pair from both scores if any arm or reference is unsupported or unscorable.",
+      "aggregation": "Each matched task/trial pair has equal weight. Missing pairs can change the task mix.",
+      "variation": "Trial ranges describe replay order on this fixed pool; they are not confidence intervals or new model samples.",
+      "reservedSplit": "A protocol convention: all tasks are shipped to the browser. Freeze settings before inspecting reserved results."
+    }
+  },
+  "note": "Computed practice result. Per-run traces omitted here; import to recompute, or export them from the workbench."
+}

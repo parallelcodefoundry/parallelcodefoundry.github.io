@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Compare fresh code samples, self-repair, and feedback models using recorded HumanEval experiments." />
+  <title>Ablation Workbench · SC26</title>
+  <link rel="stylesheet" href="workbench/workbench.css" />
+  <script type="module" src="workbench/ablation-app.mjs"></script>
+</head>
+<body data-demo="ablation">
+  <a class="skip-link" href="#main">Skip to demo</a>
+  <header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="../index.html#demos">SC26 · LLM Evaluation</a>
+    <nav aria-label="Demo navigation"><a href="sampling-workbench.html">Sampling workbench</a><a href="ablation-workbench.html" aria-current="page">Ablation workbench</a></nav>
+  </div></header>
+  <main id="main" class="page sampling-lesson ablation-lesson">
+    <header>
+      <p class="eyebrow">Demo 03 · 20 minutes</p>
+      <h1>Evaluating LLM repair</h1>
+      <p class="lead">A model writes code, tests find a failure, and the model tries again. Does LLM repair help?</p>
+      <p class="hint">Outputs from <a href="https://github.com/theoxo/self-repair">Self-Repair</a> on HumanEval coding tasks. Based on <a href="https://arxiv.org/html/2306.09896v5">Olausson et al. (ICLR 2024)</a>.</p>
+    </header>
+
+    <section class="panel" aria-labelledby="task-title">
+      <h2 id="task-title">The Task</h2>
+      <p>Generate a program that passes the tests. If it fails, ask the model to explain the error and repair its code.</p>
+      <figure class="repair-example" aria-label="A model repairs a program after a test failure">
+        <div class="flow-step"><strong>Prompt</strong><p>Return whether a number is even.</p><code>is_even(2) → True</code></div>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <div class="flow-step"><strong>First program</strong><pre>return n % 2 == 1</pre><span class="failed">Test fails: False ≠ True</span></div>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <div class="flow-step"><strong>Repair</strong><p>“The condition is reversed.”</p><pre>return n % 2 == 0</pre><span class="passed">Test passes: True</span></div>
+      </figure>
+      <details><summary>Example task from the dataset</summary><pre id="example-task"></pre></details>
+    </section>
+
+    <section id="repair-panel" class="panel" data-experiment="repair" aria-labelledby="repair-title">
+      <h2 id="repair-title" tabindex="-1">1. Explore LLM Repair</h2>
+      <p><strong>Hypothesis:</strong> asking an LLM to repair failed code improves the chance of passing the tests. Try different repair settings and compare with one program.</p>
+      <form data-ui="form">
+        <fieldset data-ui="settings" disabled>
+          <div class="lesson-controls">
+            <div><label for="repair-model">Code model</label><select id="repair-model" data-field="model"><option value="codellama">Code Llama 13B Instruct</option><option value="gpt35">GPT-3.5 Turbo</option><option value="gpt4">GPT-4</option></select></div>
+            <div><label for="repair-budget">Maximum programs per task</label><select id="repair-budget" data-field="budget"><option>2</option><option>4</option><option>8</option></select></div>
+            <div><label for="repair-repairs">Repairs per failed program</label><select id="repair-repairs" data-field="repairs"><option selected>1</option><option>2</option><option>3</option><option>5</option></select></div>
+            <div data-ui="feedback-control"><label for="repair-feedback">Feedback from</label><select id="repair-feedback" data-field="feedback"><option value="self">The code model</option><option value="gpt35">GPT-3.5</option><option value="gpt4">GPT-4</option></select><small data-ui="feedback-note" hidden>External feedback uses a separate pool of Code Llama starting programs.</small></div>
+          </div>
+          <p class="hint">The limit includes initial programs and repairs. Repair candidates revise the same failed program; if they all fail, start fresh. Stop at the first test pass.</p>
+          <figure data-ui="diagram" class="comparison-diagram" aria-label="Repair workflow"></figure>
+          <details data-ui="experiment-settings" class="experiment-setup">
+            <summary>Experiment settings</summary>
+            <div class="lesson-controls">
+              <div><label for="repair-split">Task set</label><select id="repair-split" data-field="split"><option value="test">Test tasks</option><option value="reserved">Reserved tasks</option></select></div>
+              <div><label for="repair-repetitions">Experiment repetitions</label><input id="repair-repetitions" data-field="repetitions" type="number" min="1" max="20" step="1" value="10" required /></div>
+              <div><label for="repair-seed">Random seed</label><input id="repair-seed" data-field="seed" type="number" min="0" max="4294967295" step="1" value="2026" required /></div>
+            </div>
+          </details>
+        </fieldset>
+        <div class="actions">
+          <button data-ui="run" class="button primary" disabled>Run repair</button>
+          
+        </div>
+      </form>
+      <p data-ui="status" class="status" role="status" aria-live="polite">Loading recorded programs…</p>
+      <div data-ui="results-host"></div>
+      <fieldset id="hypothesis-choice" hidden>
+        <legend>Do these results support the hypothesis?</legend>
+        <div class="actions">
+          <button class="button" type="button" data-hypothesis="supported" aria-pressed="false">Supported</button>
+          <button class="button" type="button" data-hypothesis="not-supported" aria-pressed="false">Not supported</button>
+        </div>
+      </fieldset>
+    </section>
+
+    <section id="ablate-panel" class="panel" hidden data-experiment="ablate" aria-labelledby="ablate-title">
+      <h2 id="ablate-title" tabindex="-1">2. Ablate the Repair</h2>
+      <p>What if we spend the attempts on fresh programs instead? Remove repair and explore how far generation alone gets us.</p>
+      <form data-ui="form">
+        <fieldset data-ui="settings" disabled>
+          <div class="lesson-controls">
+            <div><label for="ablate-model">Code model</label><select id="ablate-model" data-field="model" disabled><option value="codellama">Code Llama 13B Instruct</option><option value="gpt35">GPT-3.5 Turbo</option><option value="gpt4">GPT-4</option></select></div>
+            <div><label for="ablate-budget">Maximum programs per task</label><select id="ablate-budget" data-field="budget" disabled><option>1</option><option selected>2</option><option>4</option><option>8</option></select></div>
+          </div>
+          <p class="hint">Change section 1 to update the model and program limit.</p>
+          <p class="hint">Each attempt starts from the task alone. No failed code, feedback, or repair is used. Stop at the first test pass.</p>
+          <figure data-ui="diagram" class="comparison-diagram" aria-label="Fresh generation workflow"></figure>
+          <details data-ui="experiment-settings" class="experiment-setup">
+            <summary>Experiment settings</summary>
+            <div class="lesson-controls">
+              <div><label for="ablate-split">Task set</label><select id="ablate-split" data-field="split"><option value="test">Test tasks</option><option value="reserved">Reserved tasks</option></select></div>
+              <div><label for="ablate-repetitions">Experiment repetitions</label><input id="ablate-repetitions" data-field="repetitions" type="number" min="1" max="20" step="1" value="10" required /></div>
+              <div><label for="ablate-seed">Random seed</label><input id="ablate-seed" data-field="seed" type="number" min="0" max="4294967295" step="1" value="2026" required /></div>
+            </div>
+          </details>
+        </fieldset>
+        <div class="actions">
+          <button data-ui="run" class="button primary" disabled>Run without repair</button>
+        </div>
+      </form>
+      <p data-ui="status" class="status" role="status" aria-live="polite">Loading recorded programs…</p>
+      <div data-ui="results-host"></div>
+      
+    </section>
+
+    <details id="data-notes">
+      <summary>Dataset and method</summary>
+      <p>Recorded programs and repairs from the <a href="https://github.com/theoxo/self-repair">Self-Repair dataset</a> (<a href="https://arxiv.org/html/2306.09896v5">Olausson et al., ICLR 2024</a>). This demo uses all 164 HumanEval tasks, with 20 initial programs and up to five repairs per failed program. Runs reuse these outputs and stop at the first recorded test pass; there is no separate hidden-test score. Section 2 compares fresh generation with a repair reference at matching settings.</p>
+    </details>
+    <footer><a href="../index.html#demos">All SC26 demos</a></footer>
+  </main>
+
+  <template id="results-template">
+    <div data-ui="results" class="experiment-results" hidden>
+      <div class="section-heading"><h3 data-ui="results-title" tabindex="-1">Results</h3><span data-ui="split-label" class="tag"></span></div>
+      <p data-ui="stale" class="stale" hidden>Settings changed. Run again to update these results.</p>
+      <figure data-ui="bars" class="result-bars" aria-label="Percentage of runs that found a passing program"></figure>
+      <p data-ui="finding" class="result-notes"></p>
+      <p data-ui="reflection"></p>
+      <details data-ui="cost-details"><summary>Cost and recovery</summary>
+        <div data-ui="cost-table" class="table-scroll" role="region" aria-label="Cost and recovery" tabindex="0"></div>
+        <p class="hint">Mean costs include failures. Input tokens and test execution are not included.</p>
+      </details>
+      <p data-ui="exclusions" class="notice" hidden></p>
+      <details data-ui="task-details"><summary>View individual tasks</summary>
+        <div class="lesson-controls">
+          <div><label data-label="task">Task</label><select data-ui="task"></select></div>
+          <div><label data-label="repetition">Experiment repetition</label><select data-ui="repetition"></select></div>
+          <div><label data-label="filter">Show</label><select data-ui="filter"><option value="all">All outcomes</option><option value="different">Different outcomes</option><option value="a-wins">Only the control passes</option><option value="b-wins">Only repair passes</option><option value="both-fail">Both fail</option></select></div>
+        </div>
+        <p data-ui="case-empty" hidden>No matching outcomes. Choose another filter.</p>
+        <div data-ui="case-detail"><details><summary>Task prompt</summary><pre data-ui="task-prompt"></pre></details><div data-ui="traces" class="trace-grid"></div></div>
+      </details>
+      <button data-ui="export" class="button" type="button">Save result (JSON)</button>
+    </div>
+  </template>
+</body>
+</html>

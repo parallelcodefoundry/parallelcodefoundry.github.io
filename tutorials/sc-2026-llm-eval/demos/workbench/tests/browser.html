@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Workbench browser checks</title>
+    <style>
+      body { font: 16px system-ui, sans-serif; margin: 2rem; }
+      iframe { width: 1200px; max-width: 100%; height: 650px; border: 1px solid #aaa; }
+      .pass { color: #176849; }
+      .fail { color: #a12435; }
+    </style>
+    <script type="module" src="browser.mjs"></script>
+  </head>
+  <body>
+    <h1>Workbench browser checks</h1>
+    <p id="status">Running…</p>
+    <ol id="checks"></ol>
+    <iframe id="preview" title="Demo under test"></iframe>
+  </body>
+</html>
