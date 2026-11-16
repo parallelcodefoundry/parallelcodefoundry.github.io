@@ -1,0 +1,378 @@
+{
+  "format": "sc26-workbench-v1",
+  "dataset": {
+    "id": "sc26-ablation-practice",
+    "version": "practice-1",
+    "kind": "synthetic",
+    "model": null,
+    "evaluator": "authored-correctness-v1",
+    "checker": "authored-public-tests-v1",
+    "limitations": [
+      "Synthetic practice data, authored for this tutorial; no model was queried.",
+      "Correctness and public-check outcomes are authored fixture labels.",
+      "Token usage, elapsed time, model configuration, and monetary cost are unavailable.",
+      "Replaying the same finite pool does not create new independent model samples.",
+      "Authentic model records and their provenance remain to be added.",
+      "No revision-without-feedback arm exists; a feedback effect cannot be isolated."
+    ]
+  },
+  "settings": {
+    "mode": "ablation",
+    "split": "development",
+    "seed": 2026,
+    "trials": 20,
+    "policies": [
+      {
+        "name": "Fresh attempt",
+        "action": "fresh",
+        "condition": "on-failure",
+        "selection": "last"
+      },
+      {
+        "name": "Feedback repair",
+        "action": "repair",
+        "condition": "on-failure",
+        "selection": "last"
+      }
+    ]
+  },
+  "result": {
+    "engineVersion": "1.1.0",
+    "diagnostic": null,
+    "dataset": {
+      "id": "sc26-ablation-practice",
+      "version": "practice-1",
+      "kind": "synthetic",
+      "model": null,
+      "evaluator": "authored-correctness-v1",
+      "checker": "authored-public-tests-v1",
+      "limitations": [
+        "Synthetic practice data, authored for this tutorial; no model was queried.",
+        "Correctness and public-check outcomes are authored fixture labels.",
+        "Token usage, elapsed time, model configuration, and monetary cost are unavailable.",
+        "Replaying the same finite pool does not create new independent model samples.",
+        "Authentic model records and their provenance remain to be added.",
+        "No revision-without-feedback arm exists; a feedback effect cannot be isolated."
+      ]
+    },
+    "settings": {
+      "mode": "ablation",
+      "split": "development",
+      "seed": 2026,
+      "trials": 20,
+      "policies": [
+        {
+          "name": "Fresh attempt",
+          "action": "fresh",
+          "condition": "on-failure",
+          "selection": "last"
+        },
+        {
+          "name": "Feedback repair",
+          "action": "repair",
+          "condition": "on-failure",
+          "selection": "last"
+        }
+      ]
+    },
+    "taskIds": [
+      "ceil-div",
+      "wrap-index",
+      "row-count",
+      "mean-value",
+      "has-converged"
+    ],
+    "requestedRuns": 100,
+    "matchedRuns": 95,
+    "excludedPairs": 5,
+    "summaries": [
+      {
+        "name": "Fresh attempt",
+        "runs": 95,
+        "scored": 95,
+        "unsupported": 0,
+        "unscorable": 0,
+        "success": 0.4842105263157895,
+        "coverage": 0.4842105263157895,
+        "gap": 0,
+        "abstentions": 0,
+        "meanCalls": 1.2842105263157895,
+        "meanChecks": 1,
+        "meanTokens": null,
+        "missingTokenRecords": 122,
+        "invalidAnswers": 0,
+        "transitions": {
+          "recovery": 9,
+          "regression": 0,
+          "stayedCorrect": 37,
+          "stayedIncorrect": 49,
+          "unknownInitial": 0
+        },
+        "attempted": {
+          "runs": 100,
+          "scored": 100,
+          "unsupported": 0,
+          "unscorable": 0,
+          "success": 0.48,
+          "coverage": 0.48,
+          "gap": 0,
+          "abstentions": 0,
+          "meanCalls": 1.32,
+          "meanChecks": 1,
+          "meanTokens": null,
+          "missingTokenRecords": 132,
+          "invalidAnswers": 0,
+          "transitions": {
+            "recovery": 11,
+            "regression": 0,
+            "stayedCorrect": 37,
+            "stayedIncorrect": 52,
+            "unknownInitial": 0
+          }
+        }
+      },
+      {
+        "name": "Feedback repair",
+        "runs": 95,
+        "scored": 95,
+        "unsupported": 0,
+        "unscorable": 0,
+        "success": 0.5578947368421052,
+        "coverage": 0.5578947368421052,
+        "gap": 0,
+        "abstentions": 0,
+        "meanCalls": 1.2842105263157895,
+        "meanChecks": 1,
+        "meanTokens": null,
+        "missingTokenRecords": 122,
+        "invalidAnswers": 0,
+        "transitions": {
+          "recovery": 16,
+          "regression": 0,
+          "stayedCorrect": 37,
+          "stayedIncorrect": 42,
+          "unknownInitial": 0
+        },
+        "attempted": {
+          "runs": 100,
+          "scored": 95,
+          "unsupported": 5,
+          "unscorable": 0,
+          "success": 0.5578947368421052,
+          "coverage": 0.5578947368421052,
+          "gap": 0,
+          "abstentions": 0,
+          "meanCalls": 1.2842105263157895,
+          "meanChecks": 1,
+          "meanTokens": null,
+          "missingTokenRecords": 122,
+          "invalidAnswers": 0,
+          "transitions": {
+            "recovery": 16,
+            "regression": 0,
+            "stayedCorrect": 37,
+            "stayedIncorrect": 42,
+            "unknownInitial": 0
+          }
+        }
+      }
+    ],
+    "baseline": {
+      "runs": 95,
+      "scored": 95,
+      "unsupported": 0,
+      "unscorable": 0,
+      "success": 0.3894736842105263,
+      "coverage": 0.3894736842105263,
+      "gap": 0,
+      "abstentions": 0,
+      "meanCalls": 1,
+      "meanChecks": 0,
+      "meanTokens": null,
+      "missingTokenRecords": 95,
+      "invalidAnswers": 0,
+      "transitions": {
+        "recovery": 0,
+        "regression": 0,
+        "stayedCorrect": 37,
+        "stayedIncorrect": 58,
+        "unknownInitial": 0
+      }
+    },
+    "difference": 0.07368421052631574,
+    "changedFactors": [
+      "action"
+    ],
+    "trialResults": [
+      {
+        "trial": 0,
+        "runs": 5,
+        "success": [
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "trial": 1,
+        "runs": 5,
+        "success": [
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "trial": 2,
+        "runs": 4,
+        "success": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "trial": 3,
+        "runs": 5,
+        "success": [
+          0.4,
+          0.4
+        ]
+      },
+      {
+        "trial": 4,
+        "runs": 5,
+        "success": [
+          0.2,
+          0.4
+        ]
+      },
+      {
+        "trial": 5,
+        "runs": 4,
+        "success": [
+          0.25,
+          0.5
+        ]
+      },
+      {
+        "trial": 6,
+        "runs": 5,
+        "success": [
+          0.6,
+          0.6
+        ]
+      },
+      {
+        "trial": 7,
+        "runs": 4,
+        "success": [
+          0.75,
+          0.75
+        ]
+      },
+      {
+        "trial": 8,
+        "runs": 5,
+        "success": [
+          0.8,
+          0.8
+        ]
+      },
+      {
+        "trial": 9,
+        "runs": 4,
+        "success": [
+          0.5,
+          0.75
+        ]
+      },
+      {
+        "trial": 10,
+        "runs": 5,
+        "success": [
+          0.4,
+          0.2
+        ]
+      },
+      {
+        "trial": 11,
+        "runs": 5,
+        "success": [
+          0.6,
+          0.6
+        ]
+      },
+      {
+        "trial": 12,
+        "runs": 5,
+        "success": [
+          0.4,
+          0.4
+        ]
+      },
+      {
+        "trial": 13,
+        "runs": 5,
+        "success": [
+          0.2,
+          0.4
+        ]
+      },
+      {
+        "trial": 14,
+        "runs": 5,
+        "success": [
+          0.4,
+          0.4
+        ]
+      },
+      {
+        "trial": 15,
+        "runs": 5,
+        "success": [
+          0.6,
+          0.8
+        ]
+      },
+      {
+        "trial": 16,
+        "runs": 4,
+        "success": [
+          0.75,
+          0.75
+        ]
+      },
+      {
+        "trial": 17,
+        "runs": 5,
+        "success": [
+          0.8,
+          0.8
+        ]
+      },
+      {
+        "trial": 18,
+        "runs": 5,
+        "success": [
+          0.4,
+          0.4
+        ]
+      },
+      {
+        "trial": 19,
+        "runs": 5,
+        "success": [
+          0.4,
+          0.6
+        ]
+      }
+    ],
+    "sweep": [],
+    "protocol": {
+      "sampling": "Seeded shuffle without replacement within a run; the pool is reused across replay trials.",
+      "pairing": "Same task, trial seed, and initial sample. Exclude a pair from both scores if any arm or reference is unsupported or unscorable.",
+      "aggregation": "Each matched task/trial pair has equal weight. Missing pairs can change the task mix.",
+      "variation": "Trial ranges describe replay order on this fixed pool; they are not confidence intervals or new model samples.",
+      "reservedSplit": "A protocol convention: all tasks are shipped to the browser. Freeze settings before inspecting reserved results."
+    }
+  },
+  "note": "Computed practice result. Per-run traces omitted here; import to recompute, or export them from the workbench."
+}

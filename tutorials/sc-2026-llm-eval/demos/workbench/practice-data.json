@@ -1,0 +1,2547 @@
+{
+  "sampling": {
+    "id": "sc26-sampling-practice",
+    "version": "practice-1",
+    "mode": "sampling",
+    "kind": "synthetic",
+    "model": null,
+    "evaluator": "authored-correctness-v1",
+    "checker": null,
+    "limitations": [
+      "Synthetic practice data, authored for this tutorial; no model was queried.",
+      "Correctness and public-check outcomes are authored fixture labels.",
+      "Token usage, elapsed time, model configuration, and monetary cost are unavailable.",
+      "Replaying the same finite pool does not create new independent model samples.",
+      "Authentic model records and their provenance remain to be added."
+    ],
+    "tasks": [
+      {
+        "id": "blocks",
+        "split": "development",
+        "family": "Indexing",
+        "prompt": "A vector has 1,000 entries. Each block holds at most 64 entries. How many blocks are needed?",
+        "records": [
+          {
+            "id": "blocks/initial-0",
+            "taskId": "blocks",
+            "runId": "blocks/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 16",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "blocks/initial-1",
+            "taskId": "blocks",
+            "runId": "blocks/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 15",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "blocks/initial-2",
+            "taskId": "blocks",
+            "runId": "blocks/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 16",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "blocks/initial-3",
+            "taskId": "blocks",
+            "runId": "blocks/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 16",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "blocks/initial-4",
+            "taskId": "blocks",
+            "runId": "blocks/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 15",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "blocks/initial-5",
+            "taskId": "blocks",
+            "runId": "blocks/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 15",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "blocks/initial-6",
+            "taskId": "blocks",
+            "runId": "blocks/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 17",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "blocks/initial-7",
+            "taskId": "blocks",
+            "runId": "blocks/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "I cannot determine a numeric answer.",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "periodic",
+        "split": "development",
+        "family": "Indexing",
+        "prompt": "A periodic array has 8 elements, indexed 0–7. Which index is one step before index 0?",
+        "records": [
+          {
+            "id": "periodic/initial-0",
+            "taskId": "periodic",
+            "runId": "periodic/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 7",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "periodic/initial-1",
+            "taskId": "periodic",
+            "runId": "periodic/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: -1",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "periodic/initial-2",
+            "taskId": "periodic",
+            "runId": "periodic/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 7",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "periodic/initial-3",
+            "taskId": "periodic",
+            "runId": "periodic/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 7",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "periodic/initial-4",
+            "taskId": "periodic",
+            "runId": "periodic/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 8",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "periodic/initial-5",
+            "taskId": "periodic",
+            "runId": "periodic/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: -1",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "periodic/initial-6",
+            "taskId": "periodic",
+            "runId": "periodic/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 7",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "periodic/initial-7",
+            "taskId": "periodic",
+            "runId": "periodic/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 8",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "halo",
+        "split": "development",
+        "family": "Storage",
+        "prompt": "A 10 × 12 interior grid gets a one-cell halo on every side. How many cells are stored in total?",
+        "records": [
+          {
+            "id": "halo/initial-0",
+            "taskId": "halo",
+            "runId": "halo/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 120",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "halo/initial-1",
+            "taskId": "halo",
+            "runId": "halo/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 144",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "halo/initial-2",
+            "taskId": "halo",
+            "runId": "halo/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 144",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "halo/initial-3",
+            "taskId": "halo",
+            "runId": "halo/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 168",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "halo/initial-4",
+            "taskId": "halo",
+            "runId": "halo/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 144",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "halo/initial-5",
+            "taskId": "halo",
+            "runId": "halo/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 168",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "halo/initial-6",
+            "taskId": "halo",
+            "runId": "halo/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 144",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "halo/initial-7",
+            "taskId": "halo",
+            "runId": "halo/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 164",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "mean",
+        "split": "development",
+        "family": "Reductions",
+        "prompt": "Rank 0 holds [2, 4]; rank 1 holds [9]. What is the mean over all three values?",
+        "records": [
+          {
+            "id": "mean/initial-0",
+            "taskId": "mean",
+            "runId": "mean/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 6",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean/initial-1",
+            "taskId": "mean",
+            "runId": "mean/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 6",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean/initial-2",
+            "taskId": "mean",
+            "runId": "mean/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 5",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean/initial-3",
+            "taskId": "mean",
+            "runId": "mean/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 6",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean/initial-4",
+            "taskId": "mean",
+            "runId": "mean/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 5",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean/initial-5",
+            "taskId": "mean",
+            "runId": "mean/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 6",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean/initial-6",
+            "taskId": "mean",
+            "runId": "mean/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 5",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean/initial-7",
+            "taskId": "mean",
+            "runId": "mean/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "I cannot determine a numeric answer.",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "csr",
+        "split": "development",
+        "family": "Sparse arrays",
+        "prompt": "A CSR matrix has row pointers [0, 2, 2, 5]. How many stored entries are in row 1 (zero-based)?",
+        "records": [
+          {
+            "id": "csr/initial-0",
+            "taskId": "csr",
+            "runId": "csr/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 0",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "csr/initial-1",
+            "taskId": "csr",
+            "runId": "csr/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 2",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "csr/initial-2",
+            "taskId": "csr",
+            "runId": "csr/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 0",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "csr/initial-3",
+            "taskId": "csr",
+            "runId": "csr/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 3",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "csr/initial-4",
+            "taskId": "csr",
+            "runId": "csr/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 0",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "csr/initial-5",
+            "taskId": "csr",
+            "runId": "csr/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 2",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "csr/initial-6",
+            "taskId": "csr",
+            "runId": "csr/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 0",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "csr/initial-7",
+            "taskId": "csr",
+            "runId": "csr/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 0",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "speedup",
+        "split": "development",
+        "family": "Performance",
+        "prompt": "A serial run takes 120 seconds; a parallel run takes 30 seconds. What is the speedup?",
+        "records": [
+          {
+            "id": "speedup/initial-0",
+            "taskId": "speedup",
+            "runId": "speedup/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "speedup/initial-1",
+            "taskId": "speedup",
+            "runId": "speedup/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "speedup/initial-2",
+            "taskId": "speedup",
+            "runId": "speedup/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "speedup/initial-3",
+            "taskId": "speedup",
+            "runId": "speedup/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 0.25",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "speedup/initial-4",
+            "taskId": "speedup",
+            "runId": "speedup/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "speedup/initial-5",
+            "taskId": "speedup",
+            "runId": "speedup/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 90",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "speedup/initial-6",
+            "taskId": "speedup",
+            "runId": "speedup/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "speedup/initial-7",
+            "taskId": "speedup",
+            "runId": "speedup/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "stride",
+        "split": "evaluation",
+        "family": "Indexing",
+        "prompt": "A row-major array has shape (4, 6). What is the flat index of element (2, 3), using zero-based indices?",
+        "records": [
+          {
+            "id": "stride/initial-0",
+            "taskId": "stride",
+            "runId": "stride/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 15",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "stride/initial-1",
+            "taskId": "stride",
+            "runId": "stride/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 11",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "stride/initial-2",
+            "taskId": "stride",
+            "runId": "stride/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 15",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "stride/initial-3",
+            "taskId": "stride",
+            "runId": "stride/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 14",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "stride/initial-4",
+            "taskId": "stride",
+            "runId": "stride/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 15",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "stride/initial-5",
+            "taskId": "stride",
+            "runId": "stride/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 15",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "stride/initial-6",
+            "taskId": "stride",
+            "runId": "stride/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 11",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "stride/initial-7",
+            "taskId": "stride",
+            "runId": "stride/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 14",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "bytes",
+        "split": "evaluation",
+        "family": "Storage",
+        "prompt": "A buffer holds 256 values, each 8 bytes wide. How many bytes does it occupy?",
+        "records": [
+          {
+            "id": "bytes/initial-0",
+            "taskId": "bytes",
+            "runId": "bytes/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 2048",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "bytes/initial-1",
+            "taskId": "bytes",
+            "runId": "bytes/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 2048",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "bytes/initial-2",
+            "taskId": "bytes",
+            "runId": "bytes/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 256",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "bytes/initial-3",
+            "taskId": "bytes",
+            "runId": "bytes/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 2048",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "bytes/initial-4",
+            "taskId": "bytes",
+            "runId": "bytes/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 2048",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "bytes/initial-5",
+            "taskId": "bytes",
+            "runId": "bytes/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 1024",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "bytes/initial-6",
+            "taskId": "bytes",
+            "runId": "bytes/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 2048",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "bytes/initial-7",
+            "taskId": "bytes",
+            "runId": "bytes/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 2048",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "residual",
+        "split": "evaluation",
+        "family": "Reductions",
+        "prompt": "The residual is [3, 4]. What is its Euclidean norm?",
+        "records": [
+          {
+            "id": "residual/initial-0",
+            "taskId": "residual",
+            "runId": "residual/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 7",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "residual/initial-1",
+            "taskId": "residual",
+            "runId": "residual/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 5",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "residual/initial-2",
+            "taskId": "residual",
+            "runId": "residual/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 25",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "residual/initial-3",
+            "taskId": "residual",
+            "runId": "residual/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 5",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "residual/initial-4",
+            "taskId": "residual",
+            "runId": "residual/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 7",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "residual/initial-5",
+            "taskId": "residual",
+            "runId": "residual/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 5",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "residual/initial-6",
+            "taskId": "residual",
+            "runId": "residual/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 7",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "residual/initial-7",
+            "taskId": "residual",
+            "runId": "residual/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 7",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "efficiency",
+        "split": "evaluation",
+        "family": "Performance",
+        "prompt": "A run has speedup 6 on 8 workers. What is parallel efficiency as a percentage?",
+        "records": [
+          {
+            "id": "efficiency/initial-0",
+            "taskId": "efficiency",
+            "runId": "efficiency/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 75",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "efficiency/initial-1",
+            "taskId": "efficiency",
+            "runId": "efficiency/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 0.75",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "efficiency/initial-2",
+            "taskId": "efficiency",
+            "runId": "efficiency/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 75",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "efficiency/initial-3",
+            "taskId": "efficiency",
+            "runId": "efficiency/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 0.75",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "efficiency/initial-4",
+            "taskId": "efficiency",
+            "runId": "efficiency/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 75",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "efficiency/initial-5",
+            "taskId": "efficiency",
+            "runId": "efficiency/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 0.75",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "efficiency/initial-6",
+            "taskId": "efficiency",
+            "runId": "efficiency/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 75",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "efficiency/initial-7",
+            "taskId": "efficiency",
+            "runId": "efficiency/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "I cannot determine a numeric answer.",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "offset",
+        "split": "evaluation",
+        "family": "Sparse arrays",
+        "prompt": "A CSR matrix has row pointers [0, 1, 4, 4, 6]. At what offset does row 3 begin (zero-based)?",
+        "records": [
+          {
+            "id": "offset/initial-0",
+            "taskId": "offset",
+            "runId": "offset/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "offset/initial-1",
+            "taskId": "offset",
+            "runId": "offset/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 6",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "offset/initial-2",
+            "taskId": "offset",
+            "runId": "offset/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "offset/initial-3",
+            "taskId": "offset",
+            "runId": "offset/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "offset/initial-4",
+            "taskId": "offset",
+            "runId": "offset/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 3",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "offset/initial-5",
+            "taskId": "offset",
+            "runId": "offset/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "offset/initial-6",
+            "taskId": "offset",
+            "runId": "offset/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 6",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "offset/initial-7",
+            "taskId": "offset",
+            "runId": "offset/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 4",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      },
+      {
+        "id": "steps",
+        "split": "evaluation",
+        "family": "Indexing",
+        "prompt": "A loop starts at time 0 and advances by 0.25 until time 2. How many advances does it make?",
+        "records": [
+          {
+            "id": "steps/initial-0",
+            "taskId": "steps",
+            "runId": "steps/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 9",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "steps/initial-1",
+            "taskId": "steps",
+            "runId": "steps/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 8",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "steps/initial-2",
+            "taskId": "steps",
+            "runId": "steps/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 9",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "steps/initial-3",
+            "taskId": "steps",
+            "runId": "steps/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 8",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "steps/initial-4",
+            "taskId": "steps",
+            "runId": "steps/draw-4",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 9",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "steps/initial-5",
+            "taskId": "steps",
+            "runId": "steps/draw-5",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 8",
+            "correct": true,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "steps/initial-6",
+            "taskId": "steps",
+            "runId": "steps/draw-6",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 9",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "steps/initial-7",
+            "taskId": "steps",
+            "runId": "steps/draw-7",
+            "parentId": null,
+            "kind": "initial",
+            "response": "Answer: 9",
+            "correct": false,
+            "publicCheck": null,
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          }
+        ]
+      }
+    ]
+  },
+  "ablation": {
+    "id": "sc26-ablation-practice",
+    "version": "practice-1",
+    "mode": "ablation",
+    "kind": "synthetic",
+    "model": null,
+    "evaluator": "authored-correctness-v1",
+    "checker": "authored-public-tests-v1",
+    "limitations": [
+      "Synthetic practice data, authored for this tutorial; no model was queried.",
+      "Correctness and public-check outcomes are authored fixture labels.",
+      "Token usage, elapsed time, model configuration, and monetary cost are unavailable.",
+      "Replaying the same finite pool does not create new independent model samples.",
+      "Authentic model records and their provenance remain to be added.",
+      "No revision-without-feedback arm exists; a feedback effect cannot be isolated."
+    ],
+    "tasks": [
+      {
+        "id": "ceil-div",
+        "split": "development",
+        "family": "Indexing",
+        "prompt": "Implement blocks(n, width) for integers n ≥ 0 and width > 0. Return the number of blocks needed to hold n entries.",
+        "publicTests": "blocks(10, 4) == 3",
+        "records": [
+          {
+            "id": "ceil-div/initial-0",
+            "taskId": "ceil-div",
+            "runId": "ceil-div/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def blocks(n, width):\n    return (n + width - 1) // width",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "ceil-div/repair-0",
+            "taskId": "ceil-div",
+            "runId": "ceil-div/draw-0",
+            "parentId": "ceil-div/initial-0",
+            "kind": "repair",
+            "response": "def blocks(n, width):\n    return n // width + 1",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "ceil-div",
+              "parentId": "ceil-div/initial-0",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "ceil-div/initial-1",
+            "taskId": "ceil-div",
+            "runId": "ceil-div/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def blocks(n, width):\n    return n // width",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "blocks(10, 4): expected 3, got 2."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "ceil-div/repair-1",
+            "taskId": "ceil-div",
+            "runId": "ceil-div/draw-1",
+            "parentId": "ceil-div/initial-1",
+            "kind": "repair",
+            "response": "def blocks(n, width):\n    return (n + width - 1) // width",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "ceil-div",
+              "parentId": "ceil-div/initial-1",
+              "feedback": "blocks(10, 4): expected 3, got 2."
+            }
+          },
+          {
+            "id": "ceil-div/initial-2",
+            "taskId": "ceil-div",
+            "runId": "ceil-div/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def blocks(n, width):\n    return n // width + 1",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "ceil-div/repair-2",
+            "taskId": "ceil-div",
+            "runId": "ceil-div/draw-2",
+            "parentId": "ceil-div/initial-2",
+            "kind": "repair",
+            "response": "def blocks(n, width):\n    return (n + width - 1) // width",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "ceil-div",
+              "parentId": "ceil-div/initial-2",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "ceil-div/initial-3",
+            "taskId": "ceil-div",
+            "runId": "ceil-div/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def blocks(n, width):\n    return round(n / width)",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "blocks(10, 4): expected 3, got 2."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "ceil-div/repair-3",
+            "taskId": "ceil-div",
+            "runId": "ceil-div/draw-3",
+            "parentId": "ceil-div/initial-3",
+            "kind": "repair",
+            "response": "def blocks(n, width):\n    return n // width + 1",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "ceil-div",
+              "parentId": "ceil-div/initial-3",
+              "feedback": "blocks(10, 4): expected 3, got 2."
+            }
+          }
+        ]
+      },
+      {
+        "id": "wrap-index",
+        "split": "development",
+        "family": "Indexing",
+        "prompt": "Implement wrap(i, n). For integer i and n > 0, return the equivalent periodic index in [0, n).",
+        "publicTests": "wrap(-1, 8) == 7",
+        "records": [
+          {
+            "id": "wrap-index/initial-0",
+            "taskId": "wrap-index",
+            "runId": "wrap-index/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def wrap(i, n):\n    return i % n",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "wrap-index/repair-0",
+            "taskId": "wrap-index",
+            "runId": "wrap-index/draw-0",
+            "parentId": "wrap-index/initial-0",
+            "kind": "repair",
+            "response": "def wrap(i, n):\n    return (i + n) % n",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "wrap-index",
+              "parentId": "wrap-index/initial-0",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "wrap-index/initial-1",
+            "taskId": "wrap-index",
+            "runId": "wrap-index/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def wrap(i, n):\n    return i + n if i < 0 else i",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "wrap-index/initial-2",
+            "taskId": "wrap-index",
+            "runId": "wrap-index/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def wrap(i, n):\n    return abs(i) % n",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "wrap(-1, 8): expected 7, got 1."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "wrap-index/repair-2",
+            "taskId": "wrap-index",
+            "runId": "wrap-index/draw-2",
+            "parentId": "wrap-index/initial-2",
+            "kind": "repair",
+            "response": "def wrap(i, n):\n    return i % n",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "wrap-index",
+              "parentId": "wrap-index/initial-2",
+              "feedback": "wrap(-1, 8): expected 7, got 1."
+            }
+          },
+          {
+            "id": "wrap-index/initial-3",
+            "taskId": "wrap-index",
+            "runId": "wrap-index/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def wrap(i, n):\n    return (i + n) % n",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "wrap-index/repair-3",
+            "taskId": "wrap-index",
+            "runId": "wrap-index/draw-3",
+            "parentId": "wrap-index/initial-3",
+            "kind": "repair",
+            "response": "def wrap(i, n):\n    return i + n if i < 0 else i",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "wrap-index",
+              "parentId": "wrap-index/initial-3",
+              "feedback": "Public test passed."
+            }
+          }
+        ]
+      },
+      {
+        "id": "row-count",
+        "split": "development",
+        "family": "Sparse arrays",
+        "prompt": "Implement row_count(ptr, row) for a valid CSR row-pointer list. Return the number of stored entries in zero-based row.",
+        "publicTests": "row_count([0, 2, 5], 0) == 2",
+        "records": [
+          {
+            "id": "row-count/initial-0",
+            "taskId": "row-count",
+            "runId": "row-count/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def row_count(ptr, row):\n    return ptr[row + 1] - ptr[row]",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "row-count/repair-0",
+            "taskId": "row-count",
+            "runId": "row-count/draw-0",
+            "parentId": "row-count/initial-0",
+            "kind": "repair",
+            "response": "def row_count(ptr, row):\n    return ptr[row + 1] - ptr[row]",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "row-count",
+              "parentId": "row-count/initial-0",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "row-count/initial-1",
+            "taskId": "row-count",
+            "runId": "row-count/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def row_count(ptr, row):\n    return ptr[row + 1]",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "row-count/repair-1",
+            "taskId": "row-count",
+            "runId": "row-count/draw-1",
+            "parentId": "row-count/initial-1",
+            "kind": "repair",
+            "response": "def row_count(ptr, row):\n    return ptr[row + 1] - ptr[row]",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "row-count",
+              "parentId": "row-count/initial-1",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "row-count/initial-2",
+            "taskId": "row-count",
+            "runId": "row-count/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def row_count(ptr, row):\n    return ptr[row]",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "row_count([0, 2, 5], 0): expected 2, got 0."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "row-count/repair-2",
+            "taskId": "row-count",
+            "runId": "row-count/draw-2",
+            "parentId": "row-count/initial-2",
+            "kind": "repair",
+            "response": "def row_count(ptr, row):\n    return ptr[row + 1]",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "row-count",
+              "parentId": "row-count/initial-2",
+              "feedback": "row_count([0, 2, 5], 0): expected 2, got 0."
+            }
+          },
+          {
+            "id": "row-count/initial-3",
+            "taskId": "row-count",
+            "runId": "row-count/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def row_count(ptr, row):\n    return len(ptr) - 1",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "row-count/repair-3",
+            "taskId": "row-count",
+            "runId": "row-count/draw-3",
+            "parentId": "row-count/initial-3",
+            "kind": "repair",
+            "response": "def row_count(ptr, row):\n    return ptr[row + 1] - ptr[row]",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "row-count",
+              "parentId": "row-count/initial-3",
+              "feedback": "Public test passed."
+            }
+          }
+        ]
+      },
+      {
+        "id": "mean-value",
+        "split": "development",
+        "family": "Reductions",
+        "prompt": "Implement mean(xs) for a nonempty list of finite numbers. Return the arithmetic mean.",
+        "publicTests": "mean([2, 4]) == 3",
+        "records": [
+          {
+            "id": "mean-value/initial-0",
+            "taskId": "mean-value",
+            "runId": "mean-value/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def mean(xs):\n    return sum(xs) / len(xs)",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean-value/repair-0",
+            "taskId": "mean-value",
+            "runId": "mean-value/draw-0",
+            "parentId": "mean-value/initial-0",
+            "kind": "repair",
+            "response": "def mean(xs):\n    return sum(xs) / len(xs)",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "mean-value",
+              "parentId": "mean-value/initial-0",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "mean-value/initial-1",
+            "taskId": "mean-value",
+            "runId": "mean-value/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def mean(xs):\n    return sum(xs) // len(xs)",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean-value/repair-1",
+            "taskId": "mean-value",
+            "runId": "mean-value/draw-1",
+            "parentId": "mean-value/initial-1",
+            "kind": "repair",
+            "response": "def mean(xs):\n    return sum(xs) / len(xs)",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "mean-value",
+              "parentId": "mean-value/initial-1",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "mean-value/initial-2",
+            "taskId": "mean-value",
+            "runId": "mean-value/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def mean(xs):\n    return sum(xs)",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "mean([2, 4]): expected 3, got 6."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean-value/initial-3",
+            "taskId": "mean-value",
+            "runId": "mean-value/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def mean(xs):\n    return (min(xs) + max(xs)) / 2",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "mean-value/repair-3",
+            "taskId": "mean-value",
+            "runId": "mean-value/draw-3",
+            "parentId": "mean-value/initial-3",
+            "kind": "repair",
+            "response": "def mean(xs):\n    return sum(xs) // len(xs)",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "mean-value",
+              "parentId": "mean-value/initial-3",
+              "feedback": "Public test passed."
+            }
+          }
+        ]
+      },
+      {
+        "id": "flat-index",
+        "split": "evaluation",
+        "family": "Indexing",
+        "prompt": "Implement flat(row, col, columns). Return the zero-based offset in a row-major array with the given number of columns.",
+        "publicTests": "flat(1, 2, 4) == 6",
+        "records": [
+          {
+            "id": "flat-index/initial-0",
+            "taskId": "flat-index",
+            "runId": "flat-index/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def flat(row, col, columns):\n    return row * columns + col",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "flat-index/repair-0",
+            "taskId": "flat-index",
+            "runId": "flat-index/draw-0",
+            "parentId": "flat-index/initial-0",
+            "kind": "repair",
+            "response": "def flat(row, col, columns):\n    return row * columns + col + 1",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "flat(1, 2, 4): expected 6, got 7."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "flat-index",
+              "parentId": "flat-index/initial-0",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "flat-index/initial-1",
+            "taskId": "flat-index",
+            "runId": "flat-index/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def flat(row, col, columns):\n    return col * columns + row",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "flat(1, 2, 4): expected 6, got 9."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "flat-index/repair-1",
+            "taskId": "flat-index",
+            "runId": "flat-index/draw-1",
+            "parentId": "flat-index/initial-1",
+            "kind": "repair",
+            "response": "def flat(row, col, columns):\n    return row * columns + col",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "flat-index",
+              "parentId": "flat-index/initial-1",
+              "feedback": "flat(1, 2, 4): expected 6, got 9."
+            }
+          },
+          {
+            "id": "flat-index/initial-2",
+            "taskId": "flat-index",
+            "runId": "flat-index/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def flat(row, col, columns):\n    return row * columns + col + 1",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "flat(1, 2, 4): expected 6, got 7."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "flat-index/repair-2",
+            "taskId": "flat-index",
+            "runId": "flat-index/draw-2",
+            "parentId": "flat-index/initial-2",
+            "kind": "repair",
+            "response": "def flat(row, col, columns):\n    return row * columns + col",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "flat-index",
+              "parentId": "flat-index/initial-2",
+              "feedback": "flat(1, 2, 4): expected 6, got 7."
+            }
+          },
+          {
+            "id": "flat-index/initial-3",
+            "taskId": "flat-index",
+            "runId": "flat-index/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def flat(row, col, columns):\n    return columns + col",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "flat-index/repair-3",
+            "taskId": "flat-index",
+            "runId": "flat-index/draw-3",
+            "parentId": "flat-index/initial-3",
+            "kind": "repair",
+            "response": "def flat(row, col, columns):\n    return row * columns + col",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "flat-index",
+              "parentId": "flat-index/initial-3",
+              "feedback": "Public test passed."
+            }
+          }
+        ]
+      },
+      {
+        "id": "exclusive-sum",
+        "split": "evaluation",
+        "family": "Reductions",
+        "prompt": "Implement prefix(xs). Return exclusive prefix sums: [2, 3, 1] becomes [0, 2, 5]. An empty input returns [].",
+        "publicTests": "prefix([2, 3, 1]) == [0, 2, 5]",
+        "records": [
+          {
+            "id": "exclusive-sum/initial-0",
+            "taskId": "exclusive-sum",
+            "runId": "exclusive-sum/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def prefix(xs):\n    return [sum(xs[:i]) for i in range(len(xs))]",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "exclusive-sum/repair-0",
+            "taskId": "exclusive-sum",
+            "runId": "exclusive-sum/draw-0",
+            "parentId": "exclusive-sum/initial-0",
+            "kind": "repair",
+            "response": "def prefix(xs):\n    return [sum(xs[:i]) for i in range(len(xs))]",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "exclusive-sum",
+              "parentId": "exclusive-sum/initial-0",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "exclusive-sum/initial-1",
+            "taskId": "exclusive-sum",
+            "runId": "exclusive-sum/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def prefix(xs):\n    return [sum(xs[:i + 1]) for i in range(len(xs))]",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "Expected [0, 2, 5], got [2, 5, 6]."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "exclusive-sum/repair-1",
+            "taskId": "exclusive-sum",
+            "runId": "exclusive-sum/draw-1",
+            "parentId": "exclusive-sum/initial-1",
+            "kind": "repair",
+            "response": "def prefix(xs):\n    return [sum(xs[:i]) for i in range(len(xs))]",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "exclusive-sum",
+              "parentId": "exclusive-sum/initial-1",
+              "feedback": "Expected [0, 2, 5], got [2, 5, 6]."
+            }
+          },
+          {
+            "id": "exclusive-sum/initial-2",
+            "taskId": "exclusive-sum",
+            "runId": "exclusive-sum/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def prefix(xs):\n    return [0] + [sum(xs[:i]) for i in range(1, len(xs))]",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "exclusive-sum/initial-3",
+            "taskId": "exclusive-sum",
+            "runId": "exclusive-sum/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def prefix(xs):\n    return xs",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "Expected [0, 2, 5], got [2, 3, 1]."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "exclusive-sum/repair-3",
+            "taskId": "exclusive-sum",
+            "runId": "exclusive-sum/draw-3",
+            "parentId": "exclusive-sum/initial-3",
+            "kind": "repair",
+            "response": "def prefix(xs):\n    return [0] + xs[:-1]",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "Expected [0, 2, 5], got [0, 2, 3]."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "exclusive-sum",
+              "parentId": "exclusive-sum/initial-3",
+              "feedback": "Expected [0, 2, 5], got [2, 3, 1]."
+            }
+          }
+        ]
+      },
+      {
+        "id": "max-absolute",
+        "split": "evaluation",
+        "family": "Reductions",
+        "prompt": "Implement max_abs(xs) for a nonempty list of finite numbers. Return the largest absolute value.",
+        "publicTests": "max_abs([-5, 2]) == 5",
+        "records": [
+          {
+            "id": "max-absolute/initial-0",
+            "taskId": "max-absolute",
+            "runId": "max-absolute/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def max_abs(xs):\n    return max(abs(x) for x in xs)",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "max-absolute/repair-0",
+            "taskId": "max-absolute",
+            "runId": "max-absolute/draw-0",
+            "parentId": "max-absolute/initial-0",
+            "kind": "repair",
+            "response": "def max_abs(xs):\n    return abs(min(xs))",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "max-absolute",
+              "parentId": "max-absolute/initial-0",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "max-absolute/initial-1",
+            "taskId": "max-absolute",
+            "runId": "max-absolute/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def max_abs(xs):\n    return abs(max(xs))",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "max_abs([-5, 2]): expected 5, got 2."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "max-absolute/repair-1",
+            "taskId": "max-absolute",
+            "runId": "max-absolute/draw-1",
+            "parentId": "max-absolute/initial-1",
+            "kind": "repair",
+            "response": "def max_abs(xs):\n    return max(abs(x) for x in xs)",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "max-absolute",
+              "parentId": "max-absolute/initial-1",
+              "feedback": "max_abs([-5, 2]): expected 5, got 2."
+            }
+          },
+          {
+            "id": "max-absolute/initial-2",
+            "taskId": "max-absolute",
+            "runId": "max-absolute/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def max_abs(xs):\n    return abs(min(xs))",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "max-absolute/repair-2",
+            "taskId": "max-absolute",
+            "runId": "max-absolute/draw-2",
+            "parentId": "max-absolute/initial-2",
+            "kind": "repair",
+            "response": "def max_abs(xs):\n    return max(abs(x) for x in xs)",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "max-absolute",
+              "parentId": "max-absolute/initial-2",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "max-absolute/initial-3",
+            "taskId": "max-absolute",
+            "runId": "max-absolute/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def max_abs(xs):\n    return max(xs)",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "max_abs([-5, 2]): expected 5, got 2."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "max-absolute/repair-3",
+            "taskId": "max-absolute",
+            "runId": "max-absolute/draw-3",
+            "parentId": "max-absolute/initial-3",
+            "kind": "repair",
+            "response": "def max_abs(xs):\n    return abs(min(xs))",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "max-absolute",
+              "parentId": "max-absolute/initial-3",
+              "feedback": "max_abs([-5, 2]): expected 5, got 2."
+            }
+          }
+        ]
+      },
+      {
+        "id": "has-converged",
+        "split": "development",
+        "family": "Stopping rules",
+        "prompt": "Implement converged(residual, tolerance). Return True exactly when abs(residual) ≤ tolerance; tolerance is nonnegative.",
+        "publicTests": "converged(0.1, 0.2) is True",
+        "records": [
+          {
+            "id": "has-converged/initial-0",
+            "taskId": "has-converged",
+            "runId": "has-converged/draw-0",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def converged(residual, tolerance):\n    return abs(residual) <= tolerance",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "has-converged/repair-0",
+            "taskId": "has-converged",
+            "runId": "has-converged/draw-0",
+            "parentId": "has-converged/initial-0",
+            "kind": "repair",
+            "response": "def converged(residual, tolerance):\n    return abs(residual) < tolerance",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "has-converged",
+              "parentId": "has-converged/initial-0",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "has-converged/initial-1",
+            "taskId": "has-converged",
+            "runId": "has-converged/draw-1",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def converged(residual, tolerance):\n    return residual <= tolerance",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "has-converged/repair-1",
+            "taskId": "has-converged",
+            "runId": "has-converged/draw-1",
+            "parentId": "has-converged/initial-1",
+            "kind": "repair",
+            "response": "def converged(residual, tolerance):\n    return abs(residual) <= tolerance",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "has-converged",
+              "parentId": "has-converged/initial-1",
+              "feedback": "Public test passed."
+            }
+          },
+          {
+            "id": "has-converged/initial-2",
+            "taskId": "has-converged",
+            "runId": "has-converged/draw-2",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def converged(residual, tolerance):\n    return abs(residual) >= tolerance",
+            "correct": false,
+            "publicCheck": {
+              "passed": false,
+              "feedback": "converged(0.1, 0.2): expected True, got False."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "has-converged/repair-2",
+            "taskId": "has-converged",
+            "runId": "has-converged/draw-2",
+            "parentId": "has-converged/initial-2",
+            "kind": "repair",
+            "response": "def converged(residual, tolerance):\n    return abs(residual) <= tolerance",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "has-converged",
+              "parentId": "has-converged/initial-2",
+              "feedback": "converged(0.1, 0.2): expected True, got False."
+            }
+          },
+          {
+            "id": "has-converged/initial-3",
+            "taskId": "has-converged",
+            "runId": "has-converged/draw-3",
+            "parentId": null,
+            "kind": "initial",
+            "response": "def converged(residual, tolerance):\n    return abs(residual) < tolerance",
+            "correct": false,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": null
+          },
+          {
+            "id": "has-converged/repair-3",
+            "taskId": "has-converged",
+            "runId": "has-converged/draw-3",
+            "parentId": "has-converged/initial-3",
+            "kind": "repair",
+            "response": "def converged(residual, tolerance):\n    return abs(residual) <= tolerance",
+            "correct": true,
+            "publicCheck": {
+              "passed": true,
+              "feedback": "Public test passed."
+            },
+            "tokens": null,
+            "provenance": "synthetic",
+            "context": {
+              "taskId": "has-converged",
+              "parentId": "has-converged/initial-3",
+              "feedback": "Public test passed."
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

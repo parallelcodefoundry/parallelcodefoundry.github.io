@@ -222,16 +222,6 @@
         color: #ffffff;
       }
 
-      .button:disabled,
-      .button:disabled:hover {
-        background: #e8edf1;
-        border-color: #c6cfd7;
-        color: #5d6b78;
-        cursor: not-allowed;
-        font-family: inherit;
-        font-size: inherit;
-      }
-
       .section {
         margin: 0 auto;
         max-width: 1120px;
@@ -290,6 +280,27 @@
         justify-content: center;
         margin-bottom: 0.85rem;
         width: 1.9rem;
+      }
+
+      .demo-labels {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-bottom: 0.85rem;
+      }
+
+      .demo-labels .number {
+        margin-bottom: 0;
+      }
+
+      .optional-label {
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 650;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 0.15rem 0.45rem;
       }
 
       .info-item h3,
@@ -432,7 +443,7 @@
             </div>
             <div class="actions">
               <a class="button primary" href="../../assets/presentations/rigorous-llm-tutorial-sc-2026.pdf">Open slides</a>
-              <button class="button secondary" type="button" disabled>Demos coming soon</button>
+              <a class="button secondary" href="#demos">Open demos</a>
             </div>
           </div>
         </section>
@@ -532,10 +543,6 @@
         <section class="section" id="demos" aria-labelledby="demos-title">
           <div class="section-heading">
             <h2 id="demos-title">Hands-On Demos</h2>
-            <p>
-              Demos are being updated for SC26 and are not yet available.
-              Each demo will isolate one evaluation idea from the slides.
-            </p>
           </div>
 
           <div class="demo-grid">
@@ -546,27 +553,53 @@
                 Inspect preset next-token logits and compare temperature,
                 random sampling, top-k, top-p, and greedy decoding.
               </p>
-              <button class="button secondary card-link" type="button" disabled>Demo coming soon</button>
+              <a class="button secondary card-link" href="demos/sampling.html">Open demo</a>
             </article>
 
             <article class="demo-card">
               <span class="number">2</span>
+              <h3>Sampling Demo</h3>
+              <p>
+                Choose how many attempts to make, when to stop, and which
+                answer to return. Compare success, coverage, and effort.
+              </p>
+              <a class="button secondary card-link" href="demos/sampling-workbench.html">Open demo</a>
+            </article>
+
+            <article class="demo-card">
+              <span class="number">3</span>
+              <h3>Ablation Demo</h3>
+              <p>
+                Compare fresh attempts with repair, then change the feedback
+                model. Inspect success, recovery, and cost.
+              </p>
+              <a class="button secondary card-link" href="demos/ablation-workbench.html">Open demo</a>
+            </article>
+
+            <article class="demo-card">
+              <div class="demo-labels">
+                <span class="number">4</span>
+                <span class="optional-label">Optional · self-guided</span>
+              </div>
               <h3>Replaying Logged Generations</h3>
               <p>
                 Run a tiny local agent, inspect its trace, and optionally replay
                 a recorded OpenAI HTTP response.
               </p>
-              <button class="button secondary card-link" type="button" disabled>Demo coming soon</button>
+              <a class="button secondary card-link" href="demos/http-replay-agent.html">Open demo</a>
             </article>
 
             <article class="demo-card">
-              <span class="number">3</span>
+              <div class="demo-labels">
+                <span class="number">5</span>
+                <span class="optional-label">Optional · self-guided</span>
+              </div>
               <h3>Probabilistic Metrics</h3>
               <p>
                 Estimate the probability that a model produces a correct output
                 instead of reporting a single sampled answer.
               </p>
-              <button class="button secondary card-link" type="button" disabled>Demo coming soon</button>
+              <a class="button secondary card-link" href="demos/probabilistic-metrics.html">Open demo</a>
             </article>
           </div>
         </section>
