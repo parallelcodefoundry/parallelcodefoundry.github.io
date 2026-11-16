@@ -525,8 +525,8 @@
               <button id="loadModelButton" class="button secondary" type="button" hidden>
                 Download TinyLlama
               </button>
-              <button id="loadLocalFileButton" class="button secondary" type="button" hidden>
-                Load GGUF file
+              <button id="loadLocalFileButton" class="button secondary" type="button" aria-describedby="localFileHelp">
+                Upload local GGUF file
               </button>
               <input id="localModelFile" type="file" accept=".gguf" hidden />
               <button id="sampleButton" class="button primary" type="button">Sample token</button>
@@ -535,6 +535,10 @@
               </button>
               <button id="resetButton" class="button secondary" type="button">Reset</button>
             </div>
+            <p class="explain" id="localFileHelp">
+              Already have a model? Select a GGUF file from your computer. It stays in your browser.
+              Older GGML files must be converted to GGUF first.
+            </p>
           </div>
 
           <div class="sample-box" aria-live="polite">
@@ -615,6 +619,7 @@
         loadModelButton: document.querySelector("#loadModelButton"),
         loadLocalFileButton: document.querySelector("#loadLocalFileButton"),
         localModelFile: document.querySelector("#localModelFile"),
+        localFileHelp: document.querySelector("#localFileHelp"),
         sampleButton: document.querySelector("#sampleButton"),
         appendButton: document.querySelector("#appendButton"),
         resetButton: document.querySelector("#resetButton"),
@@ -1179,7 +1184,8 @@
         els.contextText.disabled = !localMode || busy;
         els.loadModelButton.hidden = !localMode || localReady;
         els.loadModelButton.disabled = busy;
-        els.loadLocalFileButton.hidden = !localMode || localReady;
+        els.loadLocalFileButton.hidden = localReady;
+        els.localFileHelp.hidden = localReady;
         els.loadLocalFileButton.disabled = busy;
         els.localModelFile.disabled = busy || localReady;
         els.sampleButton.disabled = localMode ? !localReady || busy : false;
@@ -1251,10 +1257,17 @@
 
         const modelName = file.name || "Selected GGUF model";
         try {
+          els.localMode.checked = true;
+          updateMode();
           state.localModelName = modelName;
           setStatus(`Loading ${modelName}.`, "loading");
           updateControls();
+          const header = await file.slice(0, 4).text();
+          if (header !== "GGUF") {
+            throw new Error("Choose a GGUF model. Older GGML files must be converted to GGUF first.");
+          }
           await loadModelBlob(file, modelName);
+          els.sampleExplanation.textContent = "Edit the current text, then press Sample token.";
         } catch (error) {
           state.wllama = null;
           setStatus(`Local model error: ${error.message || error}`, "error");
